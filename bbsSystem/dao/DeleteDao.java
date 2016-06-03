@@ -18,7 +18,11 @@ public class DeleteDao {
 			ps = connection.prepareStatement(sql.toString());
 			
 			ps.setString(1,  number);
+<<<<<<< HEAD
 			
+=======
+			System.out.println(ps);
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 			ps.executeUpdate();
 	} catch(SQLException e) {
 		throw new SQLRuntimeException(e);

@@ -26,10 +26,23 @@ public class ManagementServlet extends HttpServlet{
 			HttpServletResponse response) throws IOException, ServletException {
 		
 		User user = (User) request.getSession().getAttribute("loginUser");
+<<<<<<< HEAD
+=======
+		boolean isShowMessageForm;
+		if (user != null) {
+			isShowMessageForm = true;
+		} else {
+			isShowMessageForm = false;
+		}
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 
 		List<Management> users = new ManagementService().getUsers();
 
 		request.setAttribute("users", users);
+<<<<<<< HEAD
+=======
+		request.setAttribute("isShowMessageForm", isShowMessageForm);
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 		
 		request.getRequestDispatcher("management.jsp").forward(request, response);
 	}
@@ -45,8 +58,13 @@ public class ManagementServlet extends HttpServlet{
 		user.setLoginId(request.getParameter("loginId"));
 		user.setStatus(request.getParameter("status"));
 		new UserService().status(user);
+<<<<<<< HEAD
 		
 		response.sendRedirect("./management");
+=======
+		System.out.println(request.getParameter("loginId")+",   "+request.getParameter("status"));
+			response.sendRedirect("./management");
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 
 	}
 		

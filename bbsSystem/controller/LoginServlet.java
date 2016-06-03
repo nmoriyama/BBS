@@ -35,7 +35,11 @@ public class LoginServlet extends HttpServlet {
 		List<String> messages = new ArrayList<String>();
 		if (user != null) {
 			session.setAttribute("loginUser", user);
+<<<<<<< HEAD
 			response.sendRedirect("top");
+=======
+			request.getRequestDispatcher("top").forward(request, response);
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 		} else {
 			messages.add("ログインに失敗しました。");
 			session.setAttribute("errorMessages", messages);

@@ -30,7 +30,11 @@ public class DeleteServlet extends HttpServlet{
 		try {
 			connection = getConnection();
 			DeleteDao.delete(connection,request.getParameter("id"));
+<<<<<<< HEAD
 			message.add("削除しました。");
+=======
+			messages.add("削除しました。");
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 			session.setAttribute("deleteMessages", message);
 			commit(connection);
 		} catch(RuntimeException e) {

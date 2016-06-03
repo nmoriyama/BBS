@@ -7,7 +7,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
+=======
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,6 +66,7 @@ public class UserMessageDao {
 			StringBuilder sql = new StringBuilder();
 			//投稿を表示
 			sql.append("SELECT * FROM postings  INNER JOIN users ON user_id = users.id ");
+<<<<<<< HEAD
 			sql.append(" AND ? >= registration_date ");  //
 			sql.append(" AND ? <= registration_date "); 
 			if (StringUtils.isEmpty(posting.getSurchCategory()) != true) {
@@ -73,6 +77,17 @@ public class UserMessageDao {
 		
 			ps = connection.prepareStatement(sql.toString());
 			
+=======
+			sql.append(" AND ? <= registration_date ");  //
+			sql.append(" AND ? >= registration_date "); 
+			if (StringUtils.isEmpty(posting.getSurchCategory()) != true) {
+				sql.append(" AND ? = category ");          //カテゴリーに
+			}
+			sql.append(" ORDER BY registration_date DESC ");
+			ps = connection.prepareStatement(sql.toString());
+			
+			//System.out.println(ps.setString();
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 			ps.setString(1,  posting.getFromDate());
 			ps.setString(2,  posting.getToDate());
 			if (StringUtils.isEmpty(posting.getSurchCategory()) != true) {
@@ -121,10 +136,20 @@ public class UserMessageDao {
 	
 	private List<UserMessage> toUserPostingList(ResultSet rs) throws SQLException {
 		List<UserMessage> ret = new ArrayList<UserMessage>();
+<<<<<<< HEAD
 		
  		try {
  			while (rs.next()) {
  				UserMessage posting = new UserMessage();
+=======
+		Timestamp lastDate = null;
+		UserMessage posting = new UserMessage();
+ 		try {
+ 			int count = 0;
+ 			while (rs.next()) {
+ 				
+ 				
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
  				int id = rs.getInt("id");
  				String body = rs.getString("body");
  				Timestamp date = rs.getTimestamp("registration_date");
@@ -132,7 +157,15 @@ public class UserMessageDao {
  				String subject = rs.getString("subject");
  				String category = rs.getString("category");
  				String account = rs.getString("account");
+<<<<<<< HEAD
 
+=======
+ 				if (count == 0) {
+ 					System.out.println(date);
+ 					posting.setFirstDate(date);
+ 				}
+ 				lastDate = date;
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
  				
  				posting.setId(id);
  				posting.setBody(body);
@@ -143,6 +176,7 @@ public class UserMessageDao {
  				posting.setAccount(account);
  				
  				ret.add(posting);
+<<<<<<< HEAD
  			}
  			return ret;
  		} finally {
@@ -199,6 +233,13 @@ public class UserMessageDao {
  			ret.add(lastYear);
  			ret.add(lastMonth);
  			ret.add(lastDay);
+=======
+ 				count ++;
+ 			}
+ 			posting.setLastDate(lastDate);
+ 			ret.add(posting);
+ 			System.out.println(lastDate);
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
  			return ret;
  		} finally {
  			close(rs);

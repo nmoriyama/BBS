@@ -16,9 +16,13 @@ private static final long serialVersionUID = 1L;
 	private String account;
 	private String fromDate;
 	private String toDate;
+<<<<<<< HEAD
 	private String surchCategory;
 
 	
+=======
+
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 	public int getId() {
 		return id;
 	}
@@ -88,6 +92,7 @@ private static final long serialVersionUID = 1L;
 	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
+<<<<<<< HEAD
 	
 	public String getSurchCategory() {
 		return surchCategory;
@@ -98,4 +103,6 @@ private static final long serialVersionUID = 1L;
 	}
 	
 
+=======
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 }

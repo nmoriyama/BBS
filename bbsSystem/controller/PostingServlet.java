@@ -31,7 +31,10 @@ public class PostingServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		List<String> postings = new ArrayList<String>();
+<<<<<<< HEAD
 		
+=======
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 		if (isValid(request, postings) == true) {
 			User user = (User) session.getAttribute("loginUser");
 			Posting posting = new Posting();
@@ -44,9 +47,12 @@ public class PostingServlet extends HttpServlet {
 			new MessageService().register(posting);
 			response.sendRedirect("./top");
 		} else {
+<<<<<<< HEAD
 			session.setAttribute("body", request.getParameter("body"));
 			session.setAttribute("subject", request.getParameter("subject"));
 			session.setAttribute("category", request.getParameter("category"));
+=======
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 			session.setAttribute("errorMessages", postings);
 			response.sendRedirect("./posting");
 		}

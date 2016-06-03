@@ -20,7 +20,7 @@ import bbsSystem.service.UserService;
 
 @WebServlet(urlPatterns = {"/setting"})
 @MultipartConfig(maxFileSize = 100000)
-public class SettingServlet extends HttpServlet {
+public class SettingsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -45,19 +45,8 @@ public class SettingServlet extends HttpServlet {
 			}
 			new UserService().update(UpdateUser, passwordCheck);
 
-<<<<<<< HEAD
-			response.sendRedirect("./management");
-		} else {
-			session.setAttribute("loginId", request.getParameter("loginId"));
-			session.setAttribute("account", request.getParameter("account"));
-			session.setAttribute("branchId", Integer.parseInt(request.getParameter("branchId")));
-			session.setAttribute("positionId", Integer.parseInt(request.getParameter("positionId")));
-			session.setAttribute("status", request.getParameter("status"));
-			
-=======
 			response.sendRedirect("./top");
 		} else {
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("setting");
 		}
@@ -84,8 +73,6 @@ public class SettingServlet extends HttpServlet {
 		String account = request.getParameter("account");
 		String password = request.getParameter("password");
 		String checkPassword = request.getParameter("checkPassword");
-		int branchId = Integer.parseInt(request.getParameter("branchId"));
-		int positionId = Integer.parseInt(request.getParameter("positionId"));
 		
 		if (StringUtils.isEmpty(account) ==true) {
 			messages.add("アカウント名を入力してください");
@@ -93,14 +80,6 @@ public class SettingServlet extends HttpServlet {
 
 		if (!password.equals(checkPassword)) {
 			messages.add("パスワードが一致しません");
-		}
-		
-		if (branchId != 1 && positionId <= 2) {
-			messages.add("支店の人は、店長もしくは社員としか登録できません");
-		}
-		
-		if (branchId == 1 && positionId == 3) {
-			messages.add("本社の人は、店長として登録できません");
 		}
 		
 		if (messages.size() == 0) {

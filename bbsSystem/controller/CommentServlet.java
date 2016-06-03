@@ -35,7 +35,11 @@ public class CommentServlet extends HttpServlet{
 			response.sendRedirect("./top");
 		} else {
 	
+<<<<<<< HEAD
 			session.setAttribute("errorMessages", postings);
+=======
+			session.setAttribute("errorMessage", postings);
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 			response.sendRedirect("./top");
 		}
 	}

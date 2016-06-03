@@ -43,6 +43,7 @@ public class SignUpServlet extends HttpServlet {
 			insertUser.setAccount(request.getParameter("account"));
 			insertUser.setBranchId(Integer.parseInt(request.getParameter("branchId")));
 			insertUser.setPositionId(Integer.parseInt(request.getParameter("positionId")));
+<<<<<<< HEAD
 			
 
 			new UserService().register(insertUser);
@@ -55,6 +56,14 @@ public class SignUpServlet extends HttpServlet {
 			session.setAttribute("positionId", Integer.parseInt(request.getParameter("positionId")));
 			
 			
+=======
+			insertUser.setStatus(request.getParameter("status"));
+
+			new UserService().register(insertUser);
+
+			response.sendRedirect("./top");
+		} else {
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("signup");
 		}

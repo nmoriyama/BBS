@@ -21,7 +21,11 @@ public class UserStatusServlet extends HttpServlet{
 			HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		List<String> postings = new ArrayList<String>();
+<<<<<<< HEAD
 		//if (isValid(request, postings) == true) {
+=======
+		if (isValid(request, postings) == true) {
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 			Management user = (Management) session.getAttribute("loginUser");
 			Comment comment = new Comment();
 			comment.setBody(request.getParameter("comment"));
@@ -30,9 +34,16 @@ public class UserStatusServlet extends HttpServlet{
 			
 			new CommentService().register(comment);
 			response.sendRedirect("./management");
+<<<<<<< HEAD
 		/*} else {
 			session.setAttribute("errorMessage", postings);
 			response.sendRedirect("./management");
 		}*/
+=======
+		} else {
+			session.setAttribute("errorMessage", postings);
+			response.sendRedirect("./management");
+		}
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 	}
 }

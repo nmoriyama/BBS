@@ -9,7 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import bbsSystem.beans.Posting;
+=======
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 import bbsSystem.beans.User;
 import bbsSystem.beans.UserMessage;
 import bbsSystem.service.MessageService;
@@ -20,6 +23,7 @@ public class TopServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
+<<<<<<< HEAD
 		
 		User user = (User) request.getSession().getAttribute("loginUser");
 		
@@ -55,6 +59,24 @@ public class TopServlet extends HttpServlet {
 		request.setAttribute("lastYear", date.get(3));
 		request.setAttribute("lastMonth", date.get(4));
 		request.setAttribute("lastDay", date.get(5));
+=======
+
+		User user = (User) request.getSession().getAttribute("loginUser");
+		boolean isShowMessageForm;
+		if (user != null) {
+			isShowMessageForm = true;
+		} else {
+			isShowMessageForm = false;
+		}
+		
+		List<UserMessage> postings = new MessageService().getPosting();
+		List<UserMessage> comments = new MessageService().getMessage();
+		request.setAttribute("users", user);
+		request.setAttribute("postings", postings);
+		request.setAttribute("comments", comments);
+		request.setAttribute("isShowMessageForm", isShowMessageForm);
+		
+>>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 		request.getRequestDispatcher("top.jsp").forward(request, response);
 	}
 }
