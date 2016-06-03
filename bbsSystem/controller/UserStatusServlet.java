@@ -21,7 +21,7 @@ public class UserStatusServlet extends HttpServlet{
 			HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		List<String> postings = new ArrayList<String>();
-		if (isValid(request, postings) == true) {
+		//if (isValid(request, postings) == true) {
 			Management user = (Management) session.getAttribute("loginUser");
 			Comment comment = new Comment();
 			comment.setBody(request.getParameter("comment"));
@@ -30,9 +30,9 @@ public class UserStatusServlet extends HttpServlet{
 			
 			new CommentService().register(comment);
 			response.sendRedirect("./management");
-		} else {
+		/*} else {
 			session.setAttribute("errorMessage", postings);
 			response.sendRedirect("./management");
-		}
+		}*/
 	}
 }

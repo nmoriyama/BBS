@@ -120,12 +120,11 @@ public class UserMessageDao {
 	private List<UserMessage> toUserPostingList(ResultSet rs) throws SQLException {
 		List<UserMessage> ret = new ArrayList<UserMessage>();
 		Timestamp lastDate = null;
-		UserMessage posting = new UserMessage();
+		
  		try {
  			int count = 0;
  			while (rs.next()) {
- 				
- 				
+ 				UserMessage posting = new UserMessage();
  				int id = rs.getInt("id");
  				String body = rs.getString("body");
  				Timestamp date = rs.getTimestamp("registration_date");
@@ -133,6 +132,7 @@ public class UserMessageDao {
  				String subject = rs.getString("subject");
  				String category = rs.getString("category");
  				String account = rs.getString("account");
+ 				System.out.println(body);
  				if (count == 0) {
  					System.out.println(date);
  					posting.setFirstDate(date);
@@ -150,12 +150,44 @@ public class UserMessageDao {
  				ret.add(posting);
  				count ++;
  			}
- 			posting.setLastDate(lastDate);
- 			ret.add(posting);
  			System.out.println(lastDate);
  			return ret;
  		} finally {
  			close(rs);
  		}
 	}
+	
+/*	private List<UserMessage> getPostingSearch(Connection connection, Posting posting) {
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			//投稿を表示
+			sql.append("SELECT * FROM postings  INNER JOIN users ON user_id = users.id ");
+			sql.append(" AND ? <= registration_date ");  //
+			sql.append(" AND ? >= registration_date "); 
+			if (StringUtils.isEmpty(posting.getSurchCategory()) != true) {
+				sql.append(" AND ? = category ");          //カテゴリーに
+			}
+			sql.append(" ORDER BY registration_date DESC ");
+			ps = connection.prepareStatement(sql.toString());
+			
+			//System.out.println(ps.setString();
+			ps.setString(1,  posting.getFromDate());
+			ps.setString(2,  posting.getToDate());
+			if (StringUtils.isEmpty(posting.getSurchCategory()) != true) {
+				ps.setString(3,  posting.getSurchCategory());
+			}
+
+			ResultSet rs = ps.executeQuery();
+			List<UserMessage> ret = toUserPostingList(rs);
+
+			return ret;
+		} catch(SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}
+		
+	}*/
 }

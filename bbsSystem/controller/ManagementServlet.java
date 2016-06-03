@@ -26,17 +26,10 @@ public class ManagementServlet extends HttpServlet{
 			HttpServletResponse response) throws IOException, ServletException {
 		
 		User user = (User) request.getSession().getAttribute("loginUser");
-		boolean isShowMessageForm;
-		if (user != null) {
-			isShowMessageForm = true;
-		} else {
-			isShowMessageForm = false;
-		}
 
 		List<Management> users = new ManagementService().getUsers();
 
 		request.setAttribute("users", users);
-		request.setAttribute("isShowMessageForm", isShowMessageForm);
 		
 		request.getRequestDispatcher("management.jsp").forward(request, response);
 	}

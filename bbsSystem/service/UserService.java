@@ -6,6 +6,7 @@ import static bbsSystem.utils.DBUtil.*;
 import java.sql.Connection;
 
 import bbsSystem.beans.InsertUser;
+import bbsSystem.beans.UpdateUser;
 import bbsSystem.beans.User;
 import bbsSystem.dao.UserDao;
 import bbsSystem.utils.CipherUtil;
@@ -35,7 +36,7 @@ public class UserService {
 	}
 
 
-	public void update(User user, int passwordCheck) {
+	public void update(UpdateUser user, int passwordCheck) {
 
 		Connection connection = null;
 		try {

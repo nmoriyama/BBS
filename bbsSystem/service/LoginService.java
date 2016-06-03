@@ -17,7 +17,7 @@ public class LoginService {
 			UserDao userDao = new UserDao();
 			String encPassword = CipherUtil.encrypt(password);
 			User user = userDao.getUser(connection, loginId, encPassword);
-			System.out.println(user.getLoginId()+",   "+ user.getPassword());
+
 			commit(connection);
 			
 			return user;

@@ -8,7 +8,7 @@ import java.util.List;
 
 import bbsSystem.beans.Posting;
 import bbsSystem.beans.UserMessage;
-import bbsSystem.dao.MessageDao;
+import bbsSystem.dao.PostingDao;
 import bbsSystem.dao.UserMessageDao;
 
 public class MessageService {
@@ -19,7 +19,7 @@ public class MessageService {
 		try {
 			connection = getConnection();
 
-			MessageDao messageDao = new MessageDao();
+			PostingDao messageDao = new PostingDao();
 			messageDao.insert(connection, posting);
 
 			commit(connection);
@@ -74,12 +74,12 @@ public class MessageService {
 		}
 	}
 	 
-	public List<UserMessage> getPostingSurch(String surch) {
+	public List<UserMessage> getPostingSurch(Posting posting) { //絞り込み機能
 		Connection connection = null;
 		try {
 			connection = getConnection();
 			UserMessageDao messageDao = new UserMessageDao();
-			List<UserMessage> ret = messageDao.getPostingSearch(connection, surch);
+			List<UserMessage> ret = messageDao.getPostingSearch(connection, posting);
 			commit(connection);
 			return ret;
 		} catch (RuntimeException e) {
