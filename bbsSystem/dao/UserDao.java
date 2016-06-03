@@ -143,7 +143,7 @@ public class UserDao {
 				ps.setString(5,  user.getStatus());
 				ps.setString(6,  user.getLoginId());
 			}
-			System.out.println(ps);
+			
 			int count = ps.executeUpdate();
 			if (count == 0) {
 				throw new NoRowsUpdatedRuntimeException();

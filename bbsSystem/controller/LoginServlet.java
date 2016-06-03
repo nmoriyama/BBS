@@ -32,13 +32,13 @@ public class LoginServlet extends HttpServlet {
 		LoginService loginService = new LoginService();
 		User user = loginService.login(loginId, password);
 		HttpSession session = request.getSession();
-		List<String> message = new ArrayList<String>();
+		List<String> messages = new ArrayList<String>();
 		if (user != null) {
 			session.setAttribute("loginUser", user);
 			response.sendRedirect("top");
 		} else {
-			message.add("ログインに失敗しました。");
-			session.setAttribute("errorMessage", message);
+			messages.add("ログインに失敗しました。");
+			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("login");
 		}	
 	}

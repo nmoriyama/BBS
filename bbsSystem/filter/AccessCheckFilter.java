@@ -25,7 +25,7 @@ public class AccessCheckFilter implements Filter {
 		List<String> messages = new ArrayList<String>();
 			
 		User user = (User) ((HttpServletRequest) request).getSession().getAttribute("loginUser");	
-		if (user == null || user.getPositionId() != 1 ) {	
+		if (user == null || (user.getPositionId() != 1 && user.getBranchId() != 1)) {	
 			messages.add("アクセスできません。");
 			session.setAttribute("errorMessages", messages);
 			((HttpServletResponse) response).sendRedirect("top");

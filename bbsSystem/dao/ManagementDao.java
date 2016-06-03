@@ -18,8 +18,10 @@ public class ManagementDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			//投稿を表示
-			sql.append("select login_id, password, account, branches.name AS branchName,  positions.name AS positionName ,status from users inner join branches on users.branch_id = branches.id "
- +" inner join positions on users.position_id = positions.id ORDER BY  users.id ASC;");
+			sql.append("select login_id, password, account, branches.name AS branchName,  "
+					+ " positions.name AS positionName ,status from users inner join branches on"
+					+ " users.branch_id = branches.id "
+					+ " inner join positions on users.position_id = positions.id ORDER BY  users.id ASC;");
 			
 			ps = connection.prepareStatement(sql.toString());
 
@@ -41,8 +43,6 @@ public class ManagementDao {
  				String loginId = rs.getString("login_id");
  				String password = rs.getString("password");
  				String account = rs.getString("account");
- 				//int branchId = rs.getInt("branch_id");
- 				//int positionId = rs.getInt("position_id");
  				String status = rs.getString("status");
  				String branchName = rs.getString("branchName");
  				String positionName = rs.getString("positionName");
@@ -52,8 +52,6 @@ public class ManagementDao {
  				posting.setLoginId(loginId);
  				posting.setPassword(password);
  				posting.setAccount(account);
- 				//posting.setBranchId(branchId);
- 				//posting.setPositionId(positionId);
  				posting.setStatus(status);
  				posting.setBranchName(branchName);
  				posting.setPositionName(positionName);

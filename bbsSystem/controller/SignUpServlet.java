@@ -43,12 +43,18 @@ public class SignUpServlet extends HttpServlet {
 			insertUser.setAccount(request.getParameter("account"));
 			insertUser.setBranchId(Integer.parseInt(request.getParameter("branchId")));
 			insertUser.setPositionId(Integer.parseInt(request.getParameter("positionId")));
-			insertUser.setStatus(request.getParameter("status"));
+			
 
 			new UserService().register(insertUser);
 
-			response.sendRedirect("./top");
+			response.sendRedirect("./management");
 		} else {
+			session.setAttribute("loginId", request.getParameter("loginId"));
+			session.setAttribute("account", request.getParameter("account"));
+			session.setAttribute("branchId", Integer.parseInt(request.getParameter("branchId")));
+			session.setAttribute("positionId", Integer.parseInt(request.getParameter("positionId")));
+			
+			
 			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("signup");
 		}

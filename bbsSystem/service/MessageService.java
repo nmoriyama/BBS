@@ -92,4 +92,24 @@ public class MessageService {
 			close(connection);
 		}
 	}
+	
+	public List<String> getDate() {  //絞込み初期値取得
+
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			UserMessageDao messageDao = new UserMessageDao();
+			List<String> ret = messageDao.getDate(connection);
+			commit(connection);
+			return ret;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} catch (Error e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
 }

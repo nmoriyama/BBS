@@ -45,8 +45,8 @@ public class ManagementServlet extends HttpServlet{
 		user.setLoginId(request.getParameter("loginId"));
 		user.setStatus(request.getParameter("status"));
 		new UserService().status(user);
-		System.out.println(request.getParameter("loginId")+",   "+request.getParameter("status"));
-			response.sendRedirect("./management");
+		
+		response.sendRedirect("./management");
 
 	}
 		
