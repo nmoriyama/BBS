@@ -12,29 +12,30 @@
 <body>
 
 
-<c:if test="${ not empty errorMessages }">
-	<div class="errorMessages">
+<c:if test="${ not empty messages }">
+	<div class="messages">
 		<ul>
-			<c:forEach items="${errorMessages}" var="message">
-				<c:out value="${message}" />
+			<c:forEach items="${messages}" var="message">
+				<li><c:out value="${message}" /><br>
 			</c:forEach>
 		</ul>
 	</div>
-	<c:remove var="errorMessages" scope="session"/>
+	<c:remove var="messages" scope="session"/>
 </c:if>
 
 
 
-	<form action = "login" method = "post"> <br />
-		<p><label for = "loginId">ログインID</label></p>
-		<input name = "loginId" id = "loginId"/><br />
+<form action = "login" method = "post"> <br />
+	<p><label for = "loginId">ログインID</label></p>
+	<input name = "loginId" id = "loginId"/><br />
 
-		<p><label for = "password">パスワード</label></p>
-		<input name = "password" type = "password" id = "password"/> <br />
+	<p><label for = "password">パスワード</label></p>
+	<input name = "password" type = "password" id = "password"/> <br />
 	
-		<p><input type = "submit" value = "ログイン"/> <br /></p>
-	</form>
+	<p><input type = "submit" value = "ログイン"/> <br /></p>
+</form>
 
 <div class="copyright">Copyright(c)Moriyama Naoki</div>
+
 </body>
 </html> 

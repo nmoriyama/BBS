@@ -27,62 +27,64 @@ function check(){
 </head>
 <body>
 
-<c:if test="${ loginUser.branchId >= 10 }">
-	<div class="errorMessages">
-		<ul>
-			<c:forEach items="${errorMessages}" var="message">
-				<c:out value="${message}" />
-			</c:forEach>
-		</ul>
-	</div>
+
+<div class="messages">
+	<ul>
+		<c:forEach items="${messages}" var="message">
+			<c:out value="${message}" />
+		</c:forEach>
+	</ul>
 	<c:remove var="errorMessages" scope="session"/>
-</c:if>
-
-<div class="header">
-	<c:if test="${ not empty loginUser }">
-		<a href="signup">ユーザー登録</a>
-		<a href="home">戻る</a>
-	</c:if>
 </div>
-<table>
-  <tr>
-    <td>ログインID</td>
-    <td>アカウント</td>
-    <td>支店</td>
-    <td>部署・役職</td>
-    <td>状態</td>
-    <td>削除</td>
-    <td>編集</td>
-  </tr>
 
-	
+<a href="signup">ユーザー登録</a>
+<a href="home">戻る</a>
+
+<table>
+	<tr>
+    	<td>ログインID</td>
+   		<td>アカウント</td>
+		<td>支店</td>
+		<td>部署・役職</td>
+		<td>編集</td>
+		<td>状態</td>
+		<td>削除</td>
+	</tr>
+
 	<c:forEach items="${users}" var="user">
 		<tr>
 			<td><div class="loginId"><c:out value="${user.loginId}" /></div></td>
 			<td><div class="account"><c:out value="${user.account}" /></div></td>
 			<td><div class="branchId"><c:out value="${user.branchName}" /></div></td>
 			<td><div class="positionId"><c:out value="${user.positionName}" /></div></td>
-			<td><form action="management" method="post" onClick="return check()">
-			<input type = "hidden" name = "loginId" value = "${user.loginId}"/>
-			<c:if test="${ user.status == 1 }">
-				<p><input type="submit" value="停止中" ></p> 
-				<input type = "hidden" name = "status" value = 2>
-			</c:if>
-			<c:if test="${ user.status == 2 }">
-				<p><input type="submit" value="利用可能" ></p>
-				<input type = "hidden" name = "status" value = 1>
-			</c:if>
-			</form></td>
-			<td><form action="deleteUser" method="post" onClick="return check()"> 
-				<input type = "hidden" name = "loginId" value = "${user.loginId}">
-				<p><input  type="submit" value="削除"></p>
-			</form></td>
-				
-			<td><form action="setting" method="get"> 
-				<input type = "hidden" name = "id" value = "${user.id}">
-				<p><input  type="submit" value="編集"></p>
-			</form></td>
-					
+			
+			<td><c:if test="${ user.id != loginUser.id }">
+				<form action="setting" method="get"> 
+					<input type = "hidden" name = "id" value = "${user.id}">
+					<p><input  type="submit" value="編集"></p>
+				</form>
+			</c:if></td>
+			
+			<td><c:if test="${ user.id != loginUser.id }">
+				<form action="management" method="post" onClick="return check()">
+					<input type = "hidden" name = "id" value = "${user.id}">
+					<c:if test="${ user.status == 1 }">
+						<input type = "hidden" name = "status" value = 2>
+						<p><input type="submit" value="停止中" ></p> 
+					</c:if>
+					<c:if test="${ user.status == 2 }">
+						<input type = "hidden" name = "status" value = 1>
+						<p><input type="submit" value="利用可能" ></p>
+					</c:if>
+				</form>
+			</c:if></td>
+			
+			<td><c:if test="${ user.id != loginUser.id }">
+				<form action="deleteUser" method="post" onClick="return check()"> 
+					<input type = "hidden" name = "id" value = "${user.id}">
+					<p><input  type="submit" value="削除"></p>
+				</form>
+			</c:if></td>
 		</tr>
 	</c:forEach>
 </table>

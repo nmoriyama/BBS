@@ -7,7 +7,10 @@ body {
 	right:100px 
 
     width: 100%;
-border-collapse: collapse;
+	border-collapse: collapse;
+}
+.head-text{
+	text-align: left;
 }
 .botton{
 	font-weight: bold;
@@ -23,22 +26,6 @@ border-collapse: collapse;
 }
 
 
-.account{
-	text-align: center;
-    height:100%;
-	width: 300px;
-	right:100px
-	text-align: center;
-	margin: 0 auto;  
-     
-}
-.date{
-    text-align: right;
-    width: 600px;
-}
-
-
-
 /*テキストボックス（ログイン、）*/
 .input-box {
 	width: 670px;
@@ -50,7 +37,7 @@ border-collapse: collapse;
 }
 
 
-
+/*表*/
 
 table {
 	border-collapse: collapse;
@@ -66,56 +53,20 @@ td {
 
 
 
-
-.form-area {
-	margin-top: 00px;
-	margin-right: 00px;
-	margin-bottom: 00px;
-	margin-left: 00px;
-	background-color: white;
-}
-
-
-
-
-.message .date {
-	font-weight: lighter;
-	color: gray;
-	font: small-caption;
-}
-
 .copyright {
 	width: 250px;
 	margin: 0 auto;
 }
 
-label {
-	display: block;
-}
-
-.errorMessages {
-	
+.messages {
 	color: red;
 	text-align: left;
 }
 .big-text{
 	font-size: 120%;
 }
-//posting
-.posting-contents {
-	margin-top: 0px;
-	margin-bottom: 0px;
-	margin-left: 0px;
-	margin-right: 0px;
-	background-color: white;
-	height:100%;
-	width: 900px;
-	right:400px
-	text-align: center;
-	    margin: 0 auto;  
-    text-align: center;  
-   
-}
+
+/*広げないように*/
 textarea {  
     resize: none;  
 }  

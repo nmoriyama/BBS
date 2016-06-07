@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div class="header">
+<div class="head-text">
 	<c:if test="${ not empty loginUser }">
 		<FONT size="5"><c:out value="${loginUser.account}" />
 		がログイン中</FONT>
@@ -28,45 +28,24 @@
 
 <br>
 <div class="main-contents">
-<c:if test="${ not empty errorMessages }">
-	<div class="errorMessages">
+<c:if test="${ not empty messages }">
+	<div class="messages">
 		<ul>
-			<c:forEach items="${errorMessages}" var="message">
-				<li><c:out value="${message}" />
+			<c:forEach items="${messages}" var="message">
+				<li><c:out value="${message}" /><br>
 			</c:forEach>
 		</ul>
 	</div>
-	<c:remove var="errorMessages" scope="session"/>
+	<c:remove var="messages" scope="session"/>
 </c:if>
 
-<c:if test="${ not empty deleteMessages }">
-	<div class="errorMessages">
-		<ul>
-			<c:forEach items="${deleteMessages}" var="message">
-				<c:out value="${message}" />
-			</c:forEach>
-		</ul>
-	</div>
-	<c:remove var="deleteMessages" scope="session"/>
-</c:if>
-
-
-<c:if test="${ not empty successMessages }">
-	<div class="errorMessages">
-		<ul>
-			
-		<c:out value="${successMessages}" />
-		</ul>
-	</div>
-	<c:remove var="successMessages" scope="session"/>
-</c:if>
 <form action="home" method="get">
 <Div Align="left">カテゴリー:
 
 <select name="category">
 	<option value="0"> 全てを表示</option>
 	<c:forEach items="${category}" var="category">
-		<option> <c:out value="${category}" /></option>
+		<option <c:if test="${SearchCategory == category }">selected</c:if>> <c:out value="${category}" /></option>
 	</c:forEach>
 </select></Div>
  <table>
@@ -120,47 +99,45 @@
 <div class = "botton"><input type="submit" value="検索"></div>
 </form>
 <br>
+
 <div class="home">
+	<c:if test="${empty postings }">該当する記事は0件でした。</c:if>
 	<c:forEach items="${postings}" var="posting">
+	<div style="border-style: double; border-width: 5px;">
+		<div Align="left">カテゴリー:<c:out value="${posting.category}" />
+		投稿者:<c:out value="${posting.account}" />
+		件名:<c:out value="${posting.subject}" /></div>
+		<div Align="left">日付:<fmt:formatDate value="${posting.date}" pattern="yyyy年MM月dd日 HH時mm分" /></div>
+		<br>
+		<div Align="left" class = big-text>本文<br><c:out value="${posting.body}" /></div>
+	</div>
+	<br>
 	<div style="border-style: solid ; border-width: 1px;">
-		<div class="top">
-			<Div Align="left">カテゴリー:<c:out value="${posting.category}" />
-			投稿者:<c:out value="${posting.account}" />
-			件名:<c:out value="${posting.subject}" /></div>
-			<Div Align="left">日付:<fmt:formatDate value="${posting.date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
-			<br>
-			<Div Align="left" class = big-text>本文<br><c:out value="${posting.body}" /></div>
+		<c:forEach items="${comments}" var="comment">
+			<c:choose>
+				<c:when test = "${comment.postingId == posting.id}">
+					<div Align="left">名前:<c:out value="${comment.account}" /></div>
+					<div Align="left">&nbsp; コメント:<c:out value="${comment.body}" /></div>
+					<br>
+				</c:when>
+			</c:choose>
+		</c:forEach>
+	</div>
+	<form action="delete" method="post">
+		<input type = "hidden" name = "id" value = "${posting.id}">
+		<c:if test="${ loginUser.branchId != 1 && loginUser.positionId == 3 && loginUser.branchId == posting.branchId}">				
+			<input type="submit" value="削除">
+		</c:if>
+		<c:if test="${ loginUser.positionId == 2 }">
+			<input type="submit" value="削除">
+		</c:if>
+	</form>
 			
-			<div class="home">
-			<br>
-			<c:forEach items="${comments}" var="comment">
-				<c:choose>
-					<c:when test = "${comment.postingId == posting.id}">
-						<Div Align="left">名前:<c:out value="${comment.account}" /></div>
-						<Div Align="left">&nbsp; コメント:<c:out value="${comment.body}" /></div>
-						<br>
-					</c:when>
-				</c:choose>
-			</c:forEach>
-			</div>
-			<form action="delete" method="post">
-			<input type = "hidden" name = "id" value = "${posting.id}">
-			<c:if test="${ loginUser.branchId != 1 && loginUser.positionId == 3 && loginUser.branchId == posting.branchId}">				
-				<input type="submit" value="削除">
-			</c:if>
-			<c:if test="${ loginUser.positionId == 2 }">
-				<input type="submit" value="削除">
-			</c:if>
-			</form>
-			
-			
-			<form action="comment" method="post">
-				<input type = "hidden" name = postingId value = "${posting.id}">
-				<textarea name="comment"  class="comment-box"></textarea><br>
-				<Div Align="center">コメント(500文字以下)<input type="submit" value="コメント"></Div>
-			</form>
-		</div>
-		</div>
+	<form action="comment" method="post">
+		<input type = "hidden" name = postingId value = "${posting.id}">
+		<textarea name="comment"  class="comment-box"></textarea><br>
+		<div Align="center">コメント(500文字以下)<input type="submit" value="コメント"></div>
+	</form>
 		<br>
 	</c:forEach>
 </div>

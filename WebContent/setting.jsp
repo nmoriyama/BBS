@@ -11,33 +11,33 @@
 </head>
 <body>
 <div class="main-contents">
-<c:if test="${ not empty errorMessages }">
+<c:if test="${ not empty messages }">
 	<div class="errorMessages">
 		<ul>
-			<c:forEach items="${errorMessages}" var="message">
-				<c:out value="${message}" />
+			<c:forEach items="${messages}" var="message">
+				<li><c:out value="${message}" /><br>
 			</c:forEach>
 		</ul>
 	</div>
-	<c:remove var="errorMessages" scope="session"/>
+	<c:remove var="messages" scope="session"/>
 </c:if>
 
 
 <form action="setting" method="post" enctype="multipart/form-data"><br />
-	<input type = "hidden" name = OldLoginId value = "${UpdateLoginId}">
-	<label for="loginId">ログインID(6文字以上20文字以下)</label>
-	<input name="loginId" id="loginId" value = "${UpdateUser.loginId }"/> <br />
+	<input type = "hidden" name = id value = "${UpdateUser.id}">
+	<p><label for="loginId">ログインID(6文字以上20文字以下)<br></label>
+	<input name="loginId" id="loginId" value = "${UpdateUser.loginId }"/> <br></p>
 	
-	<label for="password">パスワード(6文字以上255文字以下)</label>
-	<input name="password" type="password" id="password"/> <br />
+	<p><label for="password">パスワード(6文字以上255文字以下)<br></label>
+	<input name="password" type="password" id="password"/> <br></p>
 	
-	<label for="password">パスワード（確認用）</label>
-	<input name="checkPassword" type="password"/> <br />
+	<p><label for="password">パスワード(確認用)<br></label>
+	<input name="checkPassword" type="password"/> <br></p>
 	
-	<label for="account">アカウント名</label>
-	<input name="account" id="account" value = "${UpdateUser.account }"/> <br />
+	<p><label for="account">アカウント名<br></label>
+	<input name="account" id="account" value = "${UpdateUser.account }"/> <br></p>
 	
-	<p><label>支店：
+	<p><label>支店<br>
 	<select name="branchId">
 		<option value="1" <c:if test="${UpdateUser.branchId == 1}">selected</c:if>>本社</option>
 		<option value="2" <c:if test="${UpdateUser.branchId == 2}">selected</c:if>>支店Ａ</option>
@@ -46,7 +46,7 @@
 	</select> 
 	</label></p>
 	
-	<p><label>役職：
+	<p><label>役職<br>
 	<select name="positionId">
 		<option value="1" <c:if test="${UpdateUser.positionId == 1}">selected</c:if>>人事総務部</option>
 		<option value="2" <c:if test="${UpdateUser.positionId == 2}">selected</c:if>>情報セキュリティ部</option>

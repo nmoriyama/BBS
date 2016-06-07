@@ -13,15 +13,15 @@
 <body>
 
 
-<c:if test="${ not empty errorMessages }">
+<c:if test="${ not empty messages }">
 	<div class="errorMessages">
 		<ul>
-			<c:forEach items="${errorMessages}" var="message">
+			<c:forEach items="${messages}" var="message">
 				<li><c:out value="${message}" /><br>
 			</c:forEach>
 		</ul>
 	</div>
-	<c:remove var="errorMessages" scope="session"/>
+	<c:remove var="messages" scope="session"/>
 </c:if>
 
 <div class="posting-contents">
