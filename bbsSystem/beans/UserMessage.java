@@ -69,23 +69,19 @@ public class UserMessage implements Serializable {
 	public void setFirstDate(Date firstDate) {
 		this.firstDate = firstDate;
 	}
-<<<<<<< HEAD
+
 	public Date getFirstDate() {
 		return firstDate;
 	}
-	public void setLastDate(Date lastDate) {
-		this.lastDate = lastDate;
-	}
+
 	public Date getLastDate() {
 		return lastDate;
 	}
-=======
 	
 	public void setLastDate(Date lastDate) {
 		this.lastDate = lastDate;
 	}
 	
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 	public void setDate(Date date) {
 		this.date = date;
 	}
