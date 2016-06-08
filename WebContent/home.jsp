@@ -125,6 +125,15 @@
 					<c:forEach items="${ fn:split(comment.body,'<br>') }" var = "body"  >
 						<div class = "comments">&nbsp;<c:out value="${body}" /><br></div>
 					</c:forEach></div>
+					<form action="deleteComment" method="post">
+						<input type = "hidden" name = "id" value = "${comment.id}">
+							<c:if test="${ loginUser.branchId != 1 && loginUser.positionId == 3 && loginUser.branchId == comment.branchId}">				
+							<input type="submit" value="削除">
+						</c:if>
+						<c:if test="${ loginUser.positionId == 2 }">
+							<input type="submit" value="削除">
+						</c:if>
+					</form>
 					<br>
 				</c:when>
 			</c:choose>

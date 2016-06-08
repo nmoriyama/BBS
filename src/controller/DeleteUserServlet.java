@@ -13,7 +13,7 @@ import service.UserService;
 
 @WebServlet(urlPatterns = {"/deleteUser"})
 public class DeleteUserServlet extends HttpServlet{
-	private static final long sirialVersionUID = 1L;
+
 	@Override
 	protected void doPost(HttpServletRequest request, 
 			HttpServletResponse response) throws IOException, ServletException {

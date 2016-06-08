@@ -1,8 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +14,6 @@ import service.LoginService;
 
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
-	private static final long sirialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest request, 
@@ -32,8 +29,6 @@ public class LoginServlet extends HttpServlet {
 		LoginService loginService = new LoginService();
 		User user = loginService.login(loginId, password);
 		HttpSession session = request.getSession();
-		List<String> messages = new ArrayList<String>();
-		
 		session.setAttribute("loginUser", user);
 
 		response.sendRedirect("home");

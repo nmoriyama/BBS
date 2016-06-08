@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -19,13 +18,10 @@ import service.UserService;
 
 @WebServlet(urlPatterns = {"/management"})
 public class ManagementServlet extends HttpServlet{
-	private static final long sirialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest request, 
 			HttpServletResponse response) throws IOException, ServletException {
-		
-		User user = (User) request.getSession().getAttribute("loginUser");
 
 		List<Management> users = new ManagementService().getUsers();
 
@@ -38,8 +34,6 @@ public class ManagementServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, 
 			HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
-		List<String> postings = new ArrayList<String>();
-		User LoginUser = (User) request.getSession().getAttribute("loginUser");
 
 		User user = new User();
 		user.setId(Integer.parseInt(request.getParameter("id")));

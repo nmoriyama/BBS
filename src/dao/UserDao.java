@@ -110,8 +110,6 @@ public class UserDao {
 				sql.append("? ,");
 				sql.append("2");
 				sql.append(")");
-
-				ps = connection.prepareStatement(sql.toString());
 				
 				ps.setString(1,  insertUser.getLoginId());
 				ps.setString(2,  insertUser.getPassword());
@@ -190,8 +188,6 @@ public class UserDao {
 
 				sql.append(" WHERE ");
 				sql.append(" id = ? ");
-			
-				ps = connection.prepareStatement(sql.toString());
 			
 				ps.setString(1,  user.getLoginId());
 				if (passwordCheck == 0) {

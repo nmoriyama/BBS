@@ -14,10 +14,8 @@ import javax.servlet.http.HttpSession;
 import beans.Comment;
 import beans.User;
 import service.CommentService;
-
 @WebServlet(urlPatterns = {"/comment"})
 public class CommentServlet extends HttpServlet{
-	private static final long sirialVersionUID = 1L;
 	
 	@Override
 	protected void doPost(HttpServletRequest request, 

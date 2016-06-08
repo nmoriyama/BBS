@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 
 import beans.UpdateUser;
-import beans.User;
 import service.UserService;
 
 @WebServlet(urlPatterns = {"/setting"})
@@ -41,7 +40,6 @@ public class SettingServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
-		User user = (User) session.getAttribute("loginUser");
 		UpdateUser UpdateUser = getUpdateUser(request);
 		
 		if (isValid(request, messages) == true) { //仕様通りか

@@ -28,9 +28,9 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
+		/*} catch (Error e) {
 			rollback(connection);
-			throw e;
+			throw e;*/
 		} finally {
 			close(connection);
 		}
@@ -49,9 +49,9 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
+		/*} catch (Error e) {
 			rollback(connection);
-			throw e;
+			throw e;*/
 		} finally {
 			close(connection);
 		}
@@ -68,9 +68,9 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
+		/*} catch (Error e) {
 			rollback(connection);
-			throw e;
+			throw e;*/
 		} finally {
 			close(connection);
 		}
@@ -90,9 +90,9 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
+		/*} catch (Error e) {
 			rollback(connection);
-			throw e;
+			throw e;*/
 		} finally {
 			close(connection);
 		}
@@ -111,9 +111,9 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
+		/*} catch (Error e) {
 			rollback(connection);
-			throw e;
+			throw e;*/
 		} finally {
 			close(connection);
 		}
@@ -131,9 +131,9 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
+		/*} catch (Error e) {
 			rollback(connection);
-			throw e;
+			throw e;*/
 		} finally {
 			close(connection);
 		}

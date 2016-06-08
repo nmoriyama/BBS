@@ -20,10 +20,28 @@ public class DeleteDao {
 			ps.setString(1,  number);
 
 			ps.executeUpdate();
-	} catch(SQLException e) {
-		throw new SQLRuntimeException(e);
-	} finally {
-		close(ps);
+		} catch(SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}
+	}	
+	
+	public static void deleteComment(Connection connection, String number) {
+		PreparedStatement ps = null;
+		try {
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM comments WHERE id = ?;");
+			
+			ps = connection.prepareStatement(sql.toString());
+			
+			ps.setString(1,  number);
+
+			ps.executeUpdate();
+		} catch(SQLException e) {
+			throw new SQLRuntimeException(e);
+		} finally {
+			close(ps);
+		}	
 	}
-}	
 }

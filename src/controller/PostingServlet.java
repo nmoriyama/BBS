@@ -12,12 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Posting;
-import beans.User;
 import service.MessageService;
 
 @WebServlet(urlPatterns = {"/posting"})
 public class PostingServlet extends HttpServlet {
-	private static final long serialVersion = 1L;
+
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
@@ -33,7 +32,6 @@ public class PostingServlet extends HttpServlet {
 		List<String> messages = new ArrayList<String>();
 
 		if (isValid(request, messages) == true) {
-			User user = (User) session.getAttribute("loginUser");
 			Posting posting = new Posting();
 			//件名、本文、カテゴリー、登録日時、登録者
 			posting.setSubject(request.getParameter("subject"));
