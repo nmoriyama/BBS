@@ -57,6 +57,9 @@
 	<a href="./management">戻る</a>
 	<c:remove var="loginId" scope="session"/>
 	<c:remove var="account" scope="session"/>
+	<c:remove var="branchId" scope="session"/>
+	<c:remove var="positionId" scope="session"/>
+	
 </form>
 <div class="copyright">Copyright(c)Moriyama Naoki</div>
 

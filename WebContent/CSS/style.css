@@ -13,6 +13,8 @@ body {
 	text-align: left;
 }
 .botton{
+	text-align: left;
+	 left: 50px;
 	font-weight: bold;
 	  font-size: 1.4em;
 	
@@ -50,7 +52,10 @@ td {
 	border-color: black;
 }
 
-
+.comments{
+	 top:30px;, left:30px;
+	 font-size: 80%;
+}
 
 
 .copyright {

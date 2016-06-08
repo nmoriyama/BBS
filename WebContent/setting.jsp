@@ -10,9 +10,9 @@
 	<link href="CSS/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="main-contents">
+
 <c:if test="${ not empty messages }">
-	<div class="errorMessages">
+	<div class="messages">
 		<ul>
 			<c:forEach items="${messages}" var="message">
 				<li><c:out value="${message}" /><br>
@@ -37,28 +37,32 @@
 	<p><label for="account">アカウント名<br></label>
 	<input name="account" id="account" value = "${UpdateUser.account }"/> <br></p>
 	
-	<p><label>支店<br>
-	<select name="branchId">
-		<option value="1" <c:if test="${UpdateUser.branchId == 1}">selected</c:if>>本社</option>
-		<option value="2" <c:if test="${UpdateUser.branchId == 2}">selected</c:if>>支店Ａ</option>
-		<option value="3" <c:if test="${UpdateUser.branchId == 3}">selected</c:if>>支店Ｂ</option>
-		<option value="4" <c:if test="${UpdateUser.branchId == 4}">selected</c:if>>支店Ｃ</option>
-	</select> 
-	</label></p>
+	<c:if test="${ UpdateUser.id != loginUser.id }">
+		<p><label>支店<br>
+			<select name="branchId">
+				<option value="1" <c:if test="${UpdateUser.branchId == 1}">selected</c:if>>本社</option>
+				<option value="2" <c:if test="${UpdateUser.branchId == 2}">selected</c:if>>支店Ａ</option>
+				<option value="3" <c:if test="${UpdateUser.branchId == 3}">selected</c:if>>支店Ｂ</option>
+				<option value="4" <c:if test="${UpdateUser.branchId == 4}">selected</c:if>>支店Ｃ</option>
+			</select> 
+		</label></p>
+	</c:if>
 	
-	<p><label>役職<br>
-	<select name="positionId">
-		<option value="1" <c:if test="${UpdateUser.positionId == 1}">selected</c:if>>人事総務部</option>
-		<option value="2" <c:if test="${UpdateUser.positionId == 2}">selected</c:if>>情報セキュリティ部</option>
-		<option value="3" <c:if test="${UpdateUser.positionId == 3}">selected</c:if>>支店長</option>
-		<option value="4" <c:if test="${UpdateUser.positionId == 4}">selected</c:if>>社員</option>
-	</select>
-	</label></p>
+	<c:if test="${ UpdateUser.id != loginUser.id }">
+		<p><label>役職<br>
+			<select name="positionId">
+				<option value="1" <c:if test="${UpdateUser.positionId == 1}">selected</c:if>>人事総務部</option>
+				<option value="2" <c:if test="${UpdateUser.positionId == 2}">selected</c:if>>情報セキュリティ部</option>
+				<option value="3" <c:if test="${UpdateUser.positionId == 3}">selected</c:if>>支店長</option>
+				<option value="4" <c:if test="${UpdateUser.positionId == 4}">selected</c:if>>社員</option>
+			</select>
+		</label></p>
+	</c:if>
 	
 	<input type="submit" value="登録" /> <br />
 	<a href="./management">戻る</a>
 </form>
 <div class="copyright">Copyright(c)Moriyama Naoki</div>
-</div>
+
 </body>
 </html>

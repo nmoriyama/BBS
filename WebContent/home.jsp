@@ -5,6 +5,7 @@
 <%@page isELIgnored="false"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -40,7 +41,7 @@
 </c:if>
 
 <form action="home" method="get">
-<Div Align="left">カテゴリー:
+<div Align="left">カテゴリー<br>
 
 <select name="category">
 	<option value="0"> 全てを表示</option>
@@ -48,68 +49,71 @@
 		<option <c:if test="${SearchCategory == category }">selected</c:if>> <c:out value="${category}" /></option>
 	</c:forEach>
 </select></Div>
+<div Align="left">日付<br></div>
  <table>
  	<tr>
-		<th>日付</th>
-			<td>
-				<select name="toYear">
-					<c:forEach begin="${firstYear }" end="${lastYear }" var="i">
-						<option <c:if test="${i == lastYear }">selected</c:if>>
-						<c:out value="${i}" /></option>
-					</c:forEach>
-				</select>年
+		<td>
+			<select name="toYear">
+				<c:forEach begin="${firstYear }" end="${lastYear }" var="i">
+					<option <c:if test="${i == lastYear }">selected</c:if>>
+					<c:out value="${i}" /></option>
+				</c:forEach>
+			</select>年
 				
-				<select name="toMonth">
-					<c:forEach begin="1" end="12" var="i">
-						<option <c:if test="${i == lastMonth }">selected</c:if>>
-						<c:out value="${i}" /></option>
-					</c:forEach>
-				</select>月
+			<select name="toMonth">
+				<c:forEach begin="1" end="12" var="i">
+					<option <c:if test="${i == lastMonth }">selected</c:if>>
+					<c:out value="${i}" /></option>
+				</c:forEach>
+			</select>月
 				
-				<select name="toDay">
-					<c:forEach begin="1" end="31" var="i">
-						<option <c:if test="${i == lastDay }">selected</c:if>>
-						<c:out value="${i}" /></option>
-					</c:forEach>
-				</select>日 から
+			<select name="toDay">
+				<c:forEach begin="1" end="31" var="i">
+					<option <c:if test="${i == lastDay }">selected</c:if>>
+					<c:out value="${i}" /></option>
+				</c:forEach>
+			</select>日 から
 
-				<select name="fromYear">
-					<c:forEach begin="${firstYear }" end="${lastYear }" var="i">
-						<option <c:if test="${i == lastYear }">selected</c:if>>
-						<c:out value="${i + currentYear}" /></option>
-					</c:forEach>
-				</select>年
+			<select name="fromYear">
+				<c:forEach begin="${firstYear }" end="${lastYear }" var="i">
+					<option <c:if test="${i == lastYear }">selected</c:if>>
+					<c:out value="${i + currentYear}" /></option>
+				</c:forEach>
+			</select>年
 				
-				<select name="fromMonth">
-					<c:forEach begin="1" end="12" var="i">
-						<option <c:if test="${i == firstMonth }">selected</c:if>>
-						<c:out value="${i}" /></option>
-					</c:forEach>
-				</select>月
+			<select name="fromMonth">
+				<c:forEach begin="1" end="12" var="i">
+					<option <c:if test="${i == firstMonth }">selected</c:if>>
+					<c:out value="${i}" /></option>
+				</c:forEach>
+			</select>月
 				
-				<select name="fromDay">
-					<c:forEach begin="1" end="31" var="i">
-						<option <c:if test="${i == firstDay }">selected</c:if>>
-						<c:out value="${i}" /></option>
-					</c:forEach>
-				</select>日
-			</td>
-		</tr>
-	</table>
+			<select name="fromDay">
+				<c:forEach begin="1" end="31" var="i">
+					<option <c:if test="${i == firstDay }">selected</c:if>>
+					<c:out value="${i}" /></option>
+				</c:forEach>
+			</select>日
+		</td>
+	</tr>
+</table>
 <div class = "botton"><input type="submit" value="検索"></div>
 </form>
 <br>
 
 <div class="home">
-	<c:if test="${empty postings }">該当する記事は0件でした。</c:if>
+	<c:if test="${empty postings }">該当する記事は0件でした</c:if>
 	<c:forEach items="${postings}" var="posting">
 	<div style="border-style: double; border-width: 5px;">
-		<div Align="left">カテゴリー:<c:out value="${posting.category}" />
-		投稿者:<c:out value="${posting.account}" />
+		<div Align="left">カテゴリー:<c:out value="${posting.category}" />&nbsp;
+		投稿者:<c:out value="${posting.account}" />&nbsp;
 		件名:<c:out value="${posting.subject}" /></div>
 		<div Align="left">日付:<fmt:formatDate value="${posting.date}" pattern="yyyy年MM月dd日 HH時mm分" /></div>
 		<br>
-		<div Align="left" class = big-text>本文<br><c:out value="${posting.body}" /></div>
+		<div Align="left" class = big-text>
+			本文<br><c:forEach items="${ fn:split(posting.body,'<br>') }" var = "body"  >
+			&nbsp;<c:out value="${body}" /><br>
+		</c:forEach></div>
 	</div>
 	<br>
 	<div style="border-style: solid ; border-width: 1px;">
@@ -117,7 +121,10 @@
 			<c:choose>
 				<c:when test = "${comment.postingId == posting.id}">
 					<div Align="left">名前:<c:out value="${comment.account}" /></div>
-					<div Align="left">&nbsp; コメント:<c:out value="${comment.body}" /></div>
+					<div Align="left">&nbsp; コメント<br>
+					<c:forEach items="${ fn:split(comment.body,'<br>') }" var = "body"  >
+						<div class = "comments">&nbsp;<c:out value="${body}" /><br></div>
+					</c:forEach></div>
 					<br>
 				</c:when>
 			</c:choose>
@@ -134,11 +141,12 @@
 	</form>
 			
 	<form action="comment" method="post">
+		<div Align="left">コメント(500文字以下)<br>
 		<input type = "hidden" name = postingId value = "${posting.id}">
 		<textarea name="comment"  class="comment-box"></textarea><br>
-		<div Align="center">コメント(500文字以下)<input type="submit" value="コメント"></div>
+		<input type="submit" value="コメント"></div>
 	</form>
-		<br>
+	<br>
 	</c:forEach>
 </div>
 

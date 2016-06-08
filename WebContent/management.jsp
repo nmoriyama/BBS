@@ -20,26 +20,27 @@ function check(){
 }
 -->
 </script>
-
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>ユーザー管理</title>
 	<link href="CSS/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
+<c:if test="${ not empty messages }">
+	<div class="messages">
+		<ul>
+			<c:forEach items="${messages}" var="message">
+				<li><c:out value="${message}" /><br>
+			</c:forEach>
+		</ul>
+	</div>
+	<c:remove var="messages" scope="session"/>
+</c:if>
 
-<div class="messages">
-	<ul>
-		<c:forEach items="${messages}" var="message">
-			<c:out value="${message}" />
-		</c:forEach>
-	</ul>
-	<c:remove var="errorMessages" scope="session"/>
+<div class="head-text">
+	<a href="signup">ユーザー登録</a>
+	<a href="home">戻る</a>
 </div>
-
-<a href="signup">ユーザー登録</a>
-<a href="home">戻る</a>
-
 <table>
 	<tr>
     	<td>ログインID</td>
@@ -58,12 +59,12 @@ function check(){
 			<td><div class="branchId"><c:out value="${user.branchName}" /></div></td>
 			<td><div class="positionId"><c:out value="${user.positionName}" /></div></td>
 			
-			<td><c:if test="${ user.id != loginUser.id }">
+			<td>
 				<form action="setting" method="get"> 
 					<input type = "hidden" name = "id" value = "${user.id}">
 					<p><input  type="submit" value="編集"></p>
 				</form>
-			</c:if></td>
+			</td>
 			
 			<td><c:if test="${ user.id != loginUser.id }">
 				<form action="management" method="post" onClick="return check()">

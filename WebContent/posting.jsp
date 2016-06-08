@@ -14,7 +14,7 @@
 
 
 <c:if test="${ not empty messages }">
-	<div class="errorMessages">
+	<div class="messages">
 		<ul>
 			<c:forEach items="${messages}" var="message">
 				<li><c:out value="${message}" /><br>
@@ -24,37 +24,26 @@
 	<c:remove var="messages" scope="session"/>
 </c:if>
 
-<div class="posting-contents">
-<div class="posting">
-	
-	<c:if test="${ not empty loginUser }">
-	<div id = "body">
-		<form action="posting" method="post">
-			<input type = "hidden" name = "id" value = "${loginUser.id}">
-			<p><label for = "subject">件名(50文字以下)</label></p>
-			<input name = "subject" value="${subject}" /><br />
-			<br />
+
+<form action="posting" method="post">
+	<input type = "hidden" name = "id" value = "${loginUser.id}">
+	<p><label for = "subject">件名(50文字以下)</label></p>
+	<input name = "subject" value="${subject}" /><br /><br />
 		
-			<p><label for = "category">カテゴリー(10文字以下)</label></p>
-			<input name = "category" value="${category}" /><br />
-			<br />
+	<p><label for = "category">カテゴリー(10文字以下)</label></p>
+	<input name = "category" value="${category}" /><br /><br />
 			
-			<p><label for = "body">本文(1000文字以下)</label></p>
-			<textarea name="body"  class ="input-box" id = "body"><c:out value="${body}" /></textarea>
-			<br />
+	<p><label for = "body">本文(1000文字以下)</label></p>
+	<textarea name="body"  class ="input-box" id = "body"><c:out value="${body}" /></textarea><br />
 			
-			<p><input type="submit" value="投稿" ></p>
-			
-		</form>
-		</div>
-		<a href="./home">戻る</a>
-		<c:remove var="subject" scope="session"/>
-		<c:remove var="body" scope="session"/>
-		<c:remove var="category" scope="session"/>
-	</c:if>
-	</div>
+	<p><input type="submit" value="投稿" ></p>
+</form>
+		
+<a href="./home">戻る</a>
+<c:remove var="subject" scope="session"/>
+<c:remove var="body" scope="session"/>
+<c:remove var="category" scope="session"/>
 <div class="copyright">Copyright(c)Moriyama Naoki</div>
-</div>
 
 
 </body>
