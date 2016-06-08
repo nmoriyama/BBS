@@ -34,22 +34,24 @@
 	
 	<p><label for="account">アカウント名<br></label>
 	<input name="account" value="${account}"/> <br> </p>
+
+	
 	
 	<p><label>支店<br>
 	<select name="branchId">
-		<option value="1" <c:if test="${branchId == 1}">selected</c:if>>本社</option>
-		<option value="2" <c:if test="${branchId == 2}">selected</c:if>>支店Ａ</option>
-		<option value="3" <c:if test="${branchId == 3}">selected</c:if>>支店Ｂ</option>
-		<option value="4" <c:if test="${branchId == 4}">selected</c:if>>支店Ｃ</option>
+		<c:forEach items = "${ branches }" var = "branch">
+			<option value = "${ branch.id }" <c:if test = "${ branchId  ==  branch.id }">selected</c:if>>
+			<c:out value = "${ branch.name }" /></option>
+		</c:forEach>
 	</select>
 	</label></p>
-	
+
 	<p><label>役職<br>
 	<select name="positionId">
-		<option value="1" <c:if test="${positionId == 1}">selected</c:if>>人事総務部</option>
-		<option value="2" <c:if test="${positionId == 2}">selected</c:if>>情報セキュリティ部</option>
-		<option value="3" <c:if test="${positionId == 3}">selected</c:if>>支店長</option>
-		<option value="4" <c:if test="${positionId == 4}">selected</c:if>>社員</option>
+		<c:forEach items = "${ positons }" var = "position">
+			<option value = "${ position.id }" <c:if test = "${ positionId  ==  position.id }">selected</c:if>>
+			<c:out value = "${ position.name }" /></option>
+		</c:forEach>
 	</select>
 	</label></p>
 

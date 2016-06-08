@@ -6,14 +6,14 @@ import static utils.DBUtil.*;
 import java.sql.Connection;
 import java.util.List;
 
-import beans.Posting;
+import beans.Postings;
 import beans.UserMessage;
 import dao.PostingDao;
 import dao.UserMessageDao;
 
 public class MessageService {
 
-	public void register(Posting posting) {
+	public void register(Postings posting) {
 
 		Connection connection = null;
 		try {
@@ -28,9 +28,6 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		/*} catch (Error e) {
-			rollback(connection);
-			throw e;*/
 		} finally {
 			close(connection);
 		}
@@ -49,9 +46,6 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		/*} catch (Error e) {
-			rollback(connection);
-			throw e;*/
 		} finally {
 			close(connection);
 		}
@@ -68,16 +62,13 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		/*} catch (Error e) {
-			rollback(connection);
-			throw e;*/
 		} finally {
 			close(connection);
 		}
 	}
 	 
 
-	public List<UserMessage> getPostingSurch(Posting posting, int count) { //絞り込み機能
+	public List<UserMessage> getPostingSurch(Postings posting, int count) { //絞り込み機能
 
 		Connection connection = null;
 		try {
@@ -90,9 +81,6 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		/*} catch (Error e) {
-			rollback(connection);
-			throw e;*/
 		} finally {
 			close(connection);
 		}
@@ -111,9 +99,6 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		/*} catch (Error e) {
-			rollback(connection);
-			throw e;*/
 		} finally {
 			close(connection);
 		}
@@ -131,9 +116,6 @@ public class MessageService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		/*} catch (Error e) {
-			rollback(connection);
-			throw e;*/
 		} finally {
 			close(connection);
 		}

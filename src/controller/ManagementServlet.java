@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Management;
-import beans.User;
+import beans.Users;
 import service.ManagementService;
 import service.UserService;
 
@@ -35,7 +35,7 @@ public class ManagementServlet extends HttpServlet{
 			HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 
-		User user = new User();
+		Users user = new Users();
 		user.setId(Integer.parseInt(request.getParameter("id")));
 		user.setStatus(request.getParameter("status"));
 		new UserService().status(user);

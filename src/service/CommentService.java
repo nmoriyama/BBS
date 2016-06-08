@@ -5,11 +5,11 @@ import static utils.DBUtil.*;
 
 import java.sql.Connection;
 
-import beans.Comment;
+import beans.Comments;
 import dao.CommentDao;
 
 public class CommentService {
-	public void register(Comment comment) {
+	public void register(Comments comment) {
 
 		Connection connection = null;
 		try {

@@ -22,47 +22,47 @@
 	<c:remove var="messages" scope="session"/>
 </c:if>
 
+<div class = "input-text">
+	<form action="setting" method="post" enctype="multipart/form-data"><br />
+		<input type = "hidden" name = id value = "${UpdateUser.id}">
+		<p><label for="loginId">ログインID(6文字以上20文字以下)<br></label>
+		<input name="loginId" id="loginId" value = "${UpdateUser.loginId }"/> <br></p>
+	
+		<p><label for="password">パスワード(6文字以上255文字以下)<br></label>
+		<input name="password" type="password" id="password"/> <br></p>
+	
+		<p><label for="password">パスワード(確認用)<br></label>
+		<input name="checkPassword" type="password"/> <br></p>
+	
+		<p><label for="account">アカウント名<br></label>
+		<input name="account" id="account" value = "${UpdateUser.account }"/> <br></p>
+			
+		<c:if test="${ UpdateUser.id != loginUser.id }">
+			<p><label>支店<br>
+				<select name="branchId">
+					<c:forEach items = "${ branches }" var = "branch">
+						<option value = "${ branch.id }" <c:if test = "${ UpdateUser.branchId == branch.id }">selected</c:if>>
+						<c:out value = "${ branch.name }" /></option>
+					</c:forEach>
+				</select>
+			</label></p>
+		</c:if>
 
-<form action="setting" method="post" enctype="multipart/form-data"><br />
-	<input type = "hidden" name = id value = "${UpdateUser.id}">
-	<p><label for="loginId">ログインID(6文字以上20文字以下)<br></label>
-	<input name="loginId" id="loginId" value = "${UpdateUser.loginId }"/> <br></p>
+		<c:if test="${ UpdateUser.id != loginUser.id }">
+			<p><label>役職<br>
+				<select name="positionId">
+					<c:forEach items = "${ positons }" var = "position">
+						<option value = "${ position.id }" <c:if test = "${ UpdateUser.positionId == position.id }">selected</c:if>>
+						<c:out value = "${ position.name }" /></option>
+					</c:forEach>
+				</select>
+			</label></p>
+		</c:if>
 	
-	<p><label for="password">パスワード(6文字以上255文字以下)<br></label>
-	<input name="password" type="password" id="password"/> <br></p>
-	
-	<p><label for="password">パスワード(確認用)<br></label>
-	<input name="checkPassword" type="password"/> <br></p>
-	
-	<p><label for="account">アカウント名<br></label>
-	<input name="account" id="account" value = "${UpdateUser.account }"/> <br></p>
-	
-	<c:if test="${ UpdateUser.id != loginUser.id }">
-		<p><label>支店<br>
-			<select name="branchId">
-				<option value="1" <c:if test="${UpdateUser.branchId == 1}">selected</c:if>>本社</option>
-				<option value="2" <c:if test="${UpdateUser.branchId == 2}">selected</c:if>>支店Ａ</option>
-				<option value="3" <c:if test="${UpdateUser.branchId == 3}">selected</c:if>>支店Ｂ</option>
-				<option value="4" <c:if test="${UpdateUser.branchId == 4}">selected</c:if>>支店Ｃ</option>
-			</select> 
-		</label></p>
-	</c:if>
-	
-	<c:if test="${ UpdateUser.id != loginUser.id }">
-		<p><label>役職<br>
-			<select name="positionId">
-				<option value="1" <c:if test="${UpdateUser.positionId == 1}">selected</c:if>>人事総務部</option>
-				<option value="2" <c:if test="${UpdateUser.positionId == 2}">selected</c:if>>情報セキュリティ部</option>
-				<option value="3" <c:if test="${UpdateUser.positionId == 3}">selected</c:if>>支店長</option>
-				<option value="4" <c:if test="${UpdateUser.positionId == 4}">selected</c:if>>社員</option>
-			</select>
-		</label></p>
-	</c:if>
-	
-	<input type="submit" value="登録" /> <br />
-	<a href="./management">戻る</a>
-</form>
-<div class="copyright">Copyright(c)Moriyama Naoki</div>
-
+		<input type="submit" value="登録" /> <br />
+		<a href="./management">戻る</a>
+	</form>
+	<div class="copyright">Copyright(c)Moriyama Naoki</div>
+</div>
 </body>
 </html>

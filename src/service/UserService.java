@@ -4,16 +4,17 @@ import static utils.CloseableUtil.*;
 import static utils.DBUtil.*;
 
 import java.sql.Connection;
+import java.util.List;
 
-import beans.InsertUser;
-import beans.UpdateUser;
-import beans.User;
+import beans.Branches;
+import beans.Positions;
+import beans.Users;
 import dao.UserDao;
 import utils.CipherUtil;
 
 public class UserService {
 
-	public String register(InsertUser insertUser) {
+	public String register (Users insertUser) {
 		String message = new String();
 		Connection connection = null;
 		try {
@@ -27,18 +28,13 @@ public class UserService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
-			rollback(connection);
-			throw e;
 		} finally {
 			close(connection);
 		}
 		return message;
 	}
 
-
-
-	public String update(UpdateUser user, int passwordCheck) {
+	public String update (Users user, int passwordCheck) {
 		String message = new String();
 		Connection connection = null;
 		try {
@@ -54,23 +50,20 @@ public class UserService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
-			rollback(connection);
-			throw e;
 		} finally {
 			close(connection);
 		}
 		return message;
 	}
 	
-	public User getUser(String loginId, String password) {
+	public Users getUser(String loginId, String password) {
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 
 			UserDao userDao = new UserDao();
-			User user = userDao.getUser(connection, loginId, password);
+			Users user = userDao.getUser(connection, loginId, password);
 
 			commit(connection);
 
@@ -78,15 +71,12 @@ public class UserService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
-			rollback(connection);
-			throw e;
 		} finally {
 			close(connection);
 		}
 	}
 
-	public void status(User user) {
+	public void status(Users user) {
 		Connection connection = null;
 		try {
 			connection = getConnection();
@@ -95,9 +85,6 @@ public class UserService {
 			userDao.status(connection, user);
 			commit(connection);
 		} catch (RuntimeException e) {
-			rollback(connection);
-			throw e;
-		} catch (Error e) {
 			rollback(connection);
 			throw e;
 		} finally {
@@ -116,20 +103,17 @@ public class UserService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
-			rollback(connection);
-			throw e;
 		} finally {
 			close(connection);
 		}
 	}
 	
-	public UpdateUser updateUser(String loginId) {
+	public Users updateUser(String loginId) {
 		Connection connection = null;
 		try {
 			connection = getConnection();
 			UserDao userDao = new UserDao();
-			UpdateUser user = userDao.getUpdateUser(connection, loginId);
+			Users user = userDao.getUpdateUser(connection, loginId);
 
 			commit(connection);
 			
@@ -137,7 +121,38 @@ public class UserService {
 		} catch(RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch(Error e) {
+		} finally {
+			close(connection);
+		}
+	}
+
+	public List<Positions> position() {
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			UserDao userDao = new UserDao();
+			List<Positions> position = userDao.getPosition(connection);
+
+			commit(connection);
+			return position;
+		} catch (RuntimeException e) {
+			rollback(connection);
+			throw e;
+		} finally {
+			close(connection);
+		}
+	}
+
+	public List<Branches> branch() {
+		Connection connection = null;
+		try {
+			connection = getConnection();
+			UserDao userDao = new UserDao();
+			List<Branches> branch = userDao.getBranch(connection);
+
+			commit(connection);
+			return branch;
+		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
 		} finally {

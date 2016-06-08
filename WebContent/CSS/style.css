@@ -1,6 +1,6 @@
 body {
 	background-color: white;
-	text-align: center;
+
 	margin: 0 auto;  
 	height:100%;
 	font-size: 120%;
@@ -8,6 +8,10 @@ body {
 
     width: 100%;
 	border-collapse: collapse;
+}
+
+.input-text {
+	text-align: center;
 }
 .head-text{
 	text-align: left;

@@ -13,7 +13,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
-import beans.InsertUser;
+import beans.Branches;
+import beans.Positions;
+import beans.Users;
 import service.UserService;
 
 @WebServlet(urlPatterns = { "/signup" })
@@ -24,7 +26,11 @@ public class SignUpServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-
+		List<Positions> positions = new UserService().position();
+		List<Branches> branches = new UserService().branch();
+		HttpSession session = request.getSession();
+		session.setAttribute("positons", positions);
+		session.setAttribute("branches", branches);
 		request.getRequestDispatcher("signup.jsp").forward(request, response);
 	}
 
@@ -36,10 +42,10 @@ public class SignUpServlet extends HttpServlet {
 
 		HttpSession session = request.getSession();
 		if (isValid(request, messages) == true) {
-			InsertUser insertUser = new InsertUser();
+			Users insertUser = new Users();
 			insertUser.setLoginId(request.getParameter("loginId"));
 			insertUser.setPassword(request.getParameter("password"));
-			insertUser.setCheckPassword(request.getParameter("checkPassword"));
+			
 			insertUser.setAccount(request.getParameter("account"));
 			insertUser.setBranchId(Integer.parseInt(request.getParameter("branchId")));
 			insertUser.setPositionId(Integer.parseInt(request.getParameter("positionId")));

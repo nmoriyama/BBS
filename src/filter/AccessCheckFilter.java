@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.User;
+import beans.Users;
 
 @WebFilter(urlPatterns = {"/management", "/setting", "/signup"})
 public class AccessCheckFilter implements Filter {
@@ -25,7 +25,7 @@ public class AccessCheckFilter implements Filter {
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		List<String> messages = new ArrayList<String>();
 			
-		User user = (User) ((HttpServletRequest) request).getSession().getAttribute("loginUser");	
+		Users user = (Users) ((HttpServletRequest) request).getSession().getAttribute("loginUser");	
 
 		if (user == null) {
 			messages.add("ログインしていません");

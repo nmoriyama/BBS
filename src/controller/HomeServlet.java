@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import beans.Posting;
-import beans.User;
+import beans.Postings;
+import beans.Users;
 import beans.UserMessage;
 import service.MessageService;
 @WebServlet(urlPatterns = { "/home" })
@@ -20,14 +20,14 @@ public class HomeServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {		
-		User user = (User) request.getSession().getAttribute("loginUser");
+		Users user = (Users) request.getSession().getAttribute("loginUser");
 		
 		List<UserMessage> comments = new MessageService().getMessage();
 		List<String> date = new MessageService().getDate();
 		
 		String fromDate;
 		String toDate;
-		Posting posting = new Posting();
+		Postings posting = new Postings();
 		if (request.getParameter("fromYear") != null) {
 			fromDate = request.getParameter("fromYear")+"-"+request.getParameter("fromMonth")+"-"+request.getParameter("fromDay")+" 23:59:59";
 			toDate = request.getParameter("toYear")+"-"+request.getParameter("toMonth")+"-"+request.getParameter("toDay")+" 00:00:00";

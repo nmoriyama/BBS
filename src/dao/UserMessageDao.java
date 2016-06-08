@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.Posting;
+import beans.Postings;
 import beans.UserMessage;
 import exception.SQLRuntimeException;
 
@@ -55,7 +55,7 @@ public class UserMessageDao {
 		}
 	}
 	
-	public List<UserMessage> getPostingSearch(Connection connection,Posting posting,int count) {
+	public List<UserMessage> getPostingSearch(Connection connection,Postings posting,int count) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.Posting;
+import beans.Postings;
 import service.MessageService;
 
 @WebServlet(urlPatterns = {"/posting"})
@@ -32,7 +32,7 @@ public class PostingServlet extends HttpServlet {
 		List<String> messages = new ArrayList<String>();
 
 		if (isValid(request, messages) == true) {
-			Posting posting = new Posting();
+			Postings posting = new Postings();
 			//件名、本文、カテゴリー、登録日時、登録者
 			posting.setSubject(request.getParameter("subject"));
 			String text = request.getParameter("body");

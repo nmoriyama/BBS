@@ -15,10 +15,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.DeleteDao;
+import dao.PostingDao;
 
-@WebServlet(urlPatterns = {"/delete"})
-public class DeleteServlet extends HttpServlet{
+@WebServlet(urlPatterns = {"/deletePosting"})
+public class DeletePostingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
@@ -29,14 +29,11 @@ public class DeleteServlet extends HttpServlet{
 		List<String> message = new ArrayList<String>();
 		try {
 			connection = getConnection();
-			DeleteDao.delete(connection,request.getParameter("id"));
+			PostingDao.delete(connection, request.getParameter("id"));
 			message.add("投稿を削除しました");
 			session.setAttribute("messages", message);
 			commit(connection);
 		} catch(RuntimeException e) {
-			rollback(connection);
-			throw e;
-		} catch(Error e) {
 			rollback(connection);
 			throw e;
 		} finally {

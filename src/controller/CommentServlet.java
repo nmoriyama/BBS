@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.Comment;
-import beans.User;
+import beans.Comments;
+import beans.Users;
 import service.CommentService;
 @WebServlet(urlPatterns = {"/comment"})
 public class CommentServlet extends HttpServlet{
@@ -23,12 +23,11 @@ public class CommentServlet extends HttpServlet{
 		HttpSession session = request.getSession();
 		List<String> messages = new ArrayList<String>();
 		if (isValid(request, messages) == true) {
-			User user = (User) session.getAttribute("loginUser");
-			Comment comment = new Comment();
+			Users user = (Users) session.getAttribute("loginUser");
+			Comments comment = new Comments();
 			String text = request.getParameter("comment");
 			
 			text = text.replaceAll("\n","<br>");
-	
 			
 			session.setAttribute("messages", text);
 			comment.setBody(text);

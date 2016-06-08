@@ -14,7 +14,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
-import beans.UpdateUser;
+import beans.Branches;
+import beans.Positions;
+import beans.Users;
 import service.UserService;
 
 @WebServlet(urlPatterns = {"/setting"})
@@ -27,9 +29,14 @@ public class SettingServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		UserService UserService = new UserService();
+		List<Positions> positions = new UserService().position();
+		List<Branches> branches = new UserService().branch();
 		String id = request.getParameter("id");
 		
-		UpdateUser UpdateUser = UserService.updateUser(id);
+		Users UpdateUser = UserService.updateUser(id);
+		
+		session.setAttribute("positons", positions);
+		session.setAttribute("branches", branches);
 		session.setAttribute("UpdateUser", UpdateUser);
 		request.getRequestDispatcher("setting.jsp").forward(request, response);
 		
@@ -40,7 +47,7 @@ public class SettingServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		List<String> messages = new ArrayList<String>();
 		HttpSession session = request.getSession();
-		UpdateUser UpdateUser = getUpdateUser(request);
+		Users UpdateUser = getUpdateUser(request);
 		
 		if (isValid(request, messages) == true) { //仕様通りか
 			int passwordCheck = 0;
@@ -76,14 +83,13 @@ public class SettingServlet extends HttpServlet {
 		}
 	}
 
-	private UpdateUser getUpdateUser(HttpServletRequest request)
+	private Users getUpdateUser(HttpServletRequest request)
 			throws IOException, ServletException {
-		UpdateUser UpdateUser = new UpdateUser();
+		Users UpdateUser = new Users();
 		
 		UpdateUser.setId(Integer.parseInt(request.getParameter("id")));
 		UpdateUser.setLoginId(request.getParameter("loginId"));
 		UpdateUser.setPassword(request.getParameter("password"));
-		UpdateUser.setCheckPassword(request.getParameter("checkPassword"));
 		UpdateUser.setAccount(request.getParameter("account"));
 		UpdateUser.setBranchId(Integer.parseInt(request.getParameter("branchId")));
 		UpdateUser.setPositionId(Integer.parseInt(request.getParameter("positionId")));
