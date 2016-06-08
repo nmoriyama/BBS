@@ -31,8 +31,12 @@ public class SettingServlet extends HttpServlet {
 		UserService UserService = new UserService();
 		List<Positions> positions = new UserService().position();
 		List<Branches> branches = new UserService().branch();
-		String id = request.getParameter("id");
-		
+		String id = new String();
+		if (request.getParameter("id") != null) {
+			id = request.getParameter("id");
+		} else {
+			id = (String) session.getAttribute("id");
+		}
 		Users UpdateUser = UserService.updateUser(id);
 		
 		session.setAttribute("positons", positions);
@@ -65,7 +69,7 @@ public class SettingServlet extends HttpServlet {
 				session.setAttribute("positionId", Integer.parseInt(request.getParameter("positionId")));*/
 				session.setAttribute("id", request.getParameter("id"));
 				session.setAttribute("messages", messages);
-				response.sendRedirect("setting?id="+request.getParameter("id"));
+				response.sendRedirect("setting");
 			} else {
 				message = "ユーザーの情報を変更しました";
 				messages.add(message);
@@ -79,7 +83,7 @@ public class SettingServlet extends HttpServlet {
 			session.setAttribute("positionId", Integer.parseInt(request.getParameter("positionId")));*/
 			
 			session.setAttribute("messages", messages);
-			response.sendRedirect("setting?id="+request.getParameter("id"));
+			response.sendRedirect("setting");
 		}
 	}
 

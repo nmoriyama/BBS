@@ -43,62 +43,59 @@
 	</c:if>
 
 	<form action = "home" method = "get">
-		<div Align = "left">
-			カテゴリー<br> <select name = "category">
-				<option value = "0">全てを表示</option>
-				<c:forEach items = "${ category }" var = "category">
-					<option <c:if test = "${ SearchCategory  ==  category }">selected</c:if>>
-					<c:out value = "${ category }" /></option>
-				</c:forEach>
-			</select>
-		</div>
-		<div Align = "left">日付<br></div>
-		<table>
-			<tr>
-				<td>
-					<select name = "toYear">
-						<c:forEach begin = "${ firstYear }" end = "${ lastYear }" var = "i">
-							<option <c:if test = "${ i  ==  lastYear }">selected</c:if>>
-								<c:out value = "${ i }" /></option>
-						</c:forEach>
-					</select>年 <select name = "toMonth">
-						<c:forEach begin = "1" end = "12" var = "i">
-							<option <c:if test = "${ i  ==  lastMonth }">selected</c:if>>
-								<c:out value = "${ i }" /></option>
-						</c:forEach>
-					</select>月 <select name = "toDay">
-						<c:forEach begin = "1" end = "31" var = "i">
-							<option <c:if test = "${ i  ==  lastDay }">selected</c:if>>
-								<c:out value = "${ i }" /></option>
-						</c:forEach>
-					</select>日 から <select name = "fromYear">
-						<c:forEach begin = "${ firstYear }" end = "${ lastYear }" var = "i">
-							<option <c:if test = "${ i  ==  lastYear }">selected</c:if>>
-								<c:out value = "${ i + currentYear }" /></option>
-						</c:forEach>
-					</select>年 <select name = "fromMonth">
-						<c:forEach begin = "1" end = "12" var = "i">
-							<option <c:if test = "${ i  ==  firstMonth }">selected</c:if>>
-								<c:out value = "${ i }" /></option>
-						</c:forEach>
-					</select>月 <select name = "fromDay">
-						<c:forEach begin = "1" end = "31" var = "i">
-							<option <c:if test = "${ i  ==  firstDay }">selected</c:if>>
-								<c:out value = "${ i }" /></option>
-						</c:forEach>
-					</select>日
-				</td>
-			</tr>
-		</table>
-		<div class = "botton">
-			<input type = "submit" value = "検索">
-		</div>
-	</form>
-	<br>
+	
+	<div Align = "left">
+		カテゴリー<br> <select name = "category">
+			<option value = "0">全てを表示</option>
+			<c:forEach items = "${ category }" var = "category">
+				<option <c:if test = "${ SearchCategory  ==  category }">selected</c:if>>
+				<c:out value = "${ category }" /></option>
+			</c:forEach>
+		</select>
+	</div>
+	
+	<div Align = "left">日付<br></div>
+		<select name = "toYear">
+			<c:forEach begin = "${ firstYear }" end = "${ lastYear }" var = "i">
+				<option <c:if test = "${ i  ==  lastYear }">selected</c:if>>
+					<c:out value = "${ i }" /></option>
+			</c:forEach>
+		</select>年 <select name = "toMonth">
+			<c:forEach begin = "1" end = "12" var = "i">
+				<option <c:if test = "${ i  ==  lastMonth }">selected</c:if>>
+					<c:out value = "${ i }" /></option>
+			</c:forEach>
+		</select>月 <select name = "toDay">
+			<c:forEach begin = "1" end = "31" var = "i">
+				<option <c:if test = "${ i  ==  lastDay }">selected</c:if>>
+					<c:out value = "${ i }" /></option>
+			</c:forEach>
+		</select>日 から 
+		<input type = "hidden" name = "Day" value = "${toYear+toMonth}">
+		<select name = "fromYear">
+			<c:forEach begin = "${ firstYear }" end = "${ lastYear }" var = "i">
+				<option <c:if test = "${ i  ==  lastYear }">selected</c:if>>
+					<c:out value = "${ i + currentYear }" /></option>
+			</c:forEach>
+		</select>年 <select name = "fromMonth">
+			<c:forEach begin = "1" end = "12" var = "i">
+				<option <c:if test = "${ i  ==  firstMonth }">selected</c:if>>
+					<c:out value = "${ i }" /></option>
+			</c:forEach>
+		</select>月 <select name = "fromDay">
+			<c:forEach begin = "1" end = "31" var = "i">
+				<option <c:if test = "${ i  ==  firstDay }">selected</c:if>>
+					<c:out value = "${ i }" /></option>
+			</c:forEach>
+		</select>日
+
+		<div class = "botton"><input type = "submit" value = "検索"></div>
+	</form><br>
 
 	<c:if test = "${ empty postings }">該当する記事は0件でした</c:if>
+	
 	<c:forEach items = "${ postings }" var = "posting">
-		<div style = "border-style: double; border-width: 5px;">
+		<div class = "body-text">
 			<div Align = "left">
 				カテゴリー:
 				<c:out value = "${ posting.category }" />
@@ -129,7 +126,8 @@
 			</form>
 		</div>
 		<br>
-		<div style = "border-style: solid; border-width: 1px;">
+		
+		<div class = "comment-text"> 
 			<c:forEach items = "${ comments }" var = "comment">
 				<c:choose>
 					<c:when test = "${ comment.postingId  ==  posting.id }">

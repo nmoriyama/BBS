@@ -6,36 +6,36 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>設定</title>
+	<title>${UpdateUser.account }の設定</title>
 	<link href="CSS/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
 
-<c:if test="${ not empty messages }">
-	<div class="messages">
-		<ul>
-			<c:forEach items="${messages}" var="message">
-				<li><c:out value="${message}" /><br>
-			</c:forEach>
-		</ul>
-	</div>
-	<c:remove var="messages" scope="session"/>
-</c:if>
+	<c:if test="${ not empty messages }">
+		<div class="messages">
+			<ul>
+				<c:forEach items="${messages}" var="message">
+					<li><c:out value="${message}" /><br>
+				</c:forEach>
+			</ul>
+		</div>
+		<c:remove var="messages" scope="session"/>
+	</c:if>
 
 <div class = "input-text">
 	<form action="setting" method="post" enctype="multipart/form-data"><br />
 		<input type = "hidden" name = id value = "${UpdateUser.id}">
 		<p><label for="loginId">ログインID(6文字以上20文字以下)<br></label>
-		<input name="loginId" id="loginId" value = "${UpdateUser.loginId }"/> <br></p>
+		<input name="loginId" id="loginId" value = "${UpdateUser.loginId }"/><br></p>
 	
 		<p><label for="password">パスワード(6文字以上255文字以下)<br></label>
-		<input name="password" type="password" id="password"/> <br></p>
+		<input name="password" type="password" id="password"/><br></p>
 	
 		<p><label for="password">パスワード(確認用)<br></label>
-		<input name="checkPassword" type="password"/> <br></p>
+		<input name="checkPassword" type="password"/><br></p>
 	
 		<p><label for="account">アカウント名<br></label>
-		<input name="account" id="account" value = "${UpdateUser.account }"/> <br></p>
+		<input name="account" id="account" value = "${UpdateUser.account }"/><br></p>
 			
 		<c:if test="${ UpdateUser.id != loginUser.id }">
 			<p><label>支店<br>

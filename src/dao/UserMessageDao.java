@@ -104,7 +104,7 @@ public class UserMessageDao {
  				int branchId = rs.getInt("branch_id");
  				String account = rs.getString("account");
  				
- 				
+ 				System.out.println(id);
  				posting.setPostingId(postingId);
  				posting.setBranchId(branchId);
  				posting.setId(id);

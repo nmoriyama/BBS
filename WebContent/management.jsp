@@ -89,6 +89,7 @@ function check(){
 		</tr>
 	</c:forEach>
 </table>
-<div class="copyright">Copyright(c)Moriyama Naoki</div>
+	<div class="copyright">Copyright(c)Moriyama Naoki</div>
+
 </body>
 </html>

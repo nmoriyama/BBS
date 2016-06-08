@@ -22,11 +22,8 @@ public class ManagementServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest request, 
 			HttpServletResponse response) throws IOException, ServletException {
-
 		List<Management> users = new ManagementService().getUsers();
-
 		request.setAttribute("users", users);
-		
 		request.getRequestDispatcher("management.jsp").forward(request, response);
 	}
 	

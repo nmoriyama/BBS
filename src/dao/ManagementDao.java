@@ -18,21 +18,11 @@ public class ManagementDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			//投稿を表示
-			sql.append("SELECT users.id, login_id, password, account, branches.name AS branchName,  "
-					+ " positions.name AS positionName ,status "
-					+ " FROM users INNER JOIN branches ON"
-					+ " users.branch_id = branches.id "
-					+ " INNER JOIN positions ON"
-					+ " users.position_id = positions.id "
-					+ " ORDER BY  "
-					+ " users.position_id "
-					+ " ASC;");
+			sql.append("SELECT * FROM management;");
 			
 			ps = connection.prepareStatement(sql.toString());
-
 			ResultSet rs = ps.executeQuery();
 			List<Management> ret = toUserList(rs);
-
 			return ret;
 		} catch(SQLException e) {
 			throw new SQLRuntimeException(e);
@@ -43,6 +33,7 @@ public class ManagementDao {
 	
 	private static List<Management> toUserList(ResultSet rs) throws SQLException {
 		List<Management> ret = new ArrayList<Management>();
+	
  		try {
  			while (rs.next()) {
  				int id = Integer.parseInt(rs.getString("id"));

@@ -37,7 +37,7 @@ public class PostingServlet extends HttpServlet {
 			posting.setSubject(request.getParameter("subject"));
 			String text = request.getParameter("body");
 			
-			text = text.replaceAll("\n","<br>");
+			text = text.replaceAll("\n","<br>");//改行時
 			posting.setBody(text);
 			posting.setCategory(request.getParameter("category"));
 			posting.setUserId(Integer.parseInt(request.getParameter("id")));

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.Postings;
-import beans.Users;
 import beans.UserMessage;
+import beans.Users;
 import service.MessageService;
 @WebServlet(urlPatterns = { "/home" })
 public class HomeServlet extends HttpServlet {
@@ -37,6 +37,7 @@ public class HomeServlet extends HttpServlet {
 			request.setAttribute("lastYear", request.getParameter("toYear"));
 			request.setAttribute("lastMonth", request.getParameter("toMonth"));
 			request.setAttribute("lastDay", request.getParameter("toDay"));
+			System.out.println(request.getParameter("Day"));
 		} else {
 			fromDate = date.get(0)+"-"+date.get(1)+"-"+date.get(2)+" 23:59:59";
 			toDate = date.get(3)+"-"+date.get(4)+"-"+date.get(5)+" 00:00:00";

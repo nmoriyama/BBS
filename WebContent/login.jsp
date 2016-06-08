@@ -10,6 +10,7 @@
 <link href = "CSS/style.css" rel = "stylesheet" type = "text/css">
 </head>
 <body>
+
 	<c:if test = "${ not empty messages }">
 		<div class = "messages">
 			<ul>
@@ -20,7 +21,6 @@
 		</div>
 		<c:remove var = "messages" scope = "session" />
 	</c:if>
-
 
 	<div class = "input-text">
 		<form action = "login" method = "post">
@@ -41,5 +41,6 @@
 		</form>
 	</div>
 	<div class = "copyright">Copyright(c)Moriyama Naoki</div>
+	
 </body>
 </html>

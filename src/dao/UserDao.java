@@ -9,10 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.Branches;
-import beans.Positions;
 import beans.Users;
-import exception.NoRowsUpdatedRuntimeException;
 import exception.SQLRuntimeException;
 
 public class UserDao {
@@ -102,28 +99,27 @@ public class UserDao {
 			ResultSet rs = SearchPs.executeQuery();
 			if (rs.next()) {
 				message = "そのログインIDは既に登録されています";
-			} else {
-				StringBuilder sql = new StringBuilder();
-				sql.append("INSERT INTO users (login_id,password, account, branch_id, position_id, status) ");
-				sql.append("VALUES (");
-				sql.append("? ,");
-				sql.append("? ,");
-				sql.append("? ,");
-				sql.append("? ,");
-				sql.append("? ,");
-				sql.append("2");
-				sql.append(") ;");
-				
-				ps = connection.prepareStatement(sql.toString());
-				
-				ps.setString(1,  insertUser.getLoginId());
-				ps.setString(2,  insertUser.getPassword());
-				ps.setString(3,  insertUser.getAccount());
-				ps.setInt(4,  insertUser.getBranchId());
-				ps.setInt(5,  insertUser.getPositionId());
-				ps.executeUpdate();
+				return message;
 			}
+			StringBuilder sql = new StringBuilder();
+			sql.append("INSERT INTO users (login_id,password, account, branch_id, position_id, status) ");
+			sql.append("VALUES (");
+			sql.append("? ,");
+			sql.append("? ,");
+			sql.append("? ,");
+			sql.append("? ,");
+			sql.append("? ,");
+			sql.append("2");
+			sql.append(") ;");
 			
+			ps = connection.prepareStatement(sql.toString());
+			
+			ps.setString(1,  insertUser.getLoginId());
+			ps.setString(2,  insertUser.getPassword());
+			ps.setString(3,  insertUser.getAccount());
+			ps.setInt(4,  insertUser.getBranchId());
+			ps.setInt(5,  insertUser.getPositionId());
+			ps.executeUpdate();
 		} catch(SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {
@@ -149,43 +145,36 @@ public class UserDao {
 			ResultSet rs = SurchPs.executeQuery();
 			if (rs.next()) {
 				message = "そのログインIDは既に登録されています";
-			} else {
-				
-				//編集画面
-				StringBuilder sql = new StringBuilder();
-				sql.append("UPDATE users SET ");
-				sql.append("login_id = ?, ");
-				
-				sql.append("account = ?, ");
-				sql.append("branch_id = ?, ");
-				sql.append("position_id = ? ");
-				if (passwordCheck == 0) {
-					sql.append("password = ?, ");
-				}
-				sql.append(" WHERE ");
-				sql.append(" id = ? ;");
-				
-				ps = connection.prepareStatement(sql.toString());
-				
-				ps.setString(1,  user.getLoginId());
-				
-				if (passwordCheck == 0) {
-					
-					ps.setString(2,  user.getAccount());
-					ps.setInt(3,  user.getBranchId());
-					ps.setInt(4,  user.getPositionId());
-					ps.setString(5,  user.getPassword());
-					ps.setInt(6,  user.getId());
-				} else {
-					ps.setString(2,  user.getAccount());
-					ps.setInt(3,  user.getBranchId());
-					ps.setInt(4,  user.getPositionId());
-					
-					ps.setInt(5,  user.getId());
-				}
-				
-				ps.executeUpdate();
+				return message;
 			}
+				
+			//編集画面
+			StringBuilder sql = new StringBuilder();
+			sql.append("UPDATE users SET ");
+			sql.append("login_id = ?, ");
+			
+			sql.append("account = ?, ");
+			sql.append("branch_id = ?, ");
+			sql.append("position_id = ? ");
+			if (passwordCheck == 0) {
+				sql.append("password = ?, ");
+			}
+			sql.append(" WHERE ");
+			sql.append(" id = ? ;");
+			
+			ps = connection.prepareStatement(sql.toString());
+			
+			ps.setString(1,  user.getLoginId());
+			ps.setString(2,  user.getAccount());
+			ps.setInt(3,  user.getBranchId());
+			ps.setInt(4,  user.getPositionId());
+			if (passwordCheck == 0) {
+				ps.setString(5,  user.getPassword());
+				ps.setInt(6,  user.getId());
+			} else {
+				ps.setInt(5,  user.getId());
+			}
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {
@@ -202,17 +191,14 @@ public class UserDao {
 			StringBuilder sql = new StringBuilder();
 			sql.append("UPDATE users SET ");
 			sql.append("status = ?");
-
 			sql.append(" WHERE ");
 			sql.append(" id = ? ;");
+			
 			ps = connection.prepareStatement(sql.toString());
+			
 			ps.setString(1,  user.getStatus());
 			ps.setInt(2,  user.getId());
-			int count = ps.executeUpdate();
-			if (count == 0) {
-				throw new NoRowsUpdatedRuntimeException();
-			}
-			
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {
@@ -224,61 +210,10 @@ public class UserDao {
 
 		PreparedStatement ps = null;
 		try {
-			String sql = "DELETE FROM users WHERE id = " + id + ";";
+			String sql = "DELETE FROM users WHERE id = ? ;";
 			ps = connection.prepareStatement(sql);
-			
-			int count = ps.executeUpdate();
-			if (count == 0) {
-				throw new NoRowsUpdatedRuntimeException();
-			}
-		} catch (SQLException e) {
-			throw new SQLRuntimeException(e);
-		} finally {
-			close(ps);
-		}
-	}
-
-	public List<Positions> getPosition (Connection connection) {
-		PreparedStatement ps = null;
-		try {
-			String sql = "SELECT * FROM positions ;";
-			ps = connection.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			List<Positions> Positions = new ArrayList<Positions>();
-			while (rs.next()) {
-				String name = rs.getString("name");
-				int id = rs.getInt("id");
-				Positions Position = new Positions();
-				Position.setId(id);
-				Position.setName(name);
-				Positions.add(Position);
-			}
-		
-			return Positions;
-		} catch (SQLException e) {
-			throw new SQLRuntimeException(e);
-		} finally {
-			close(ps);
-		}
-	}
-	
-	public List<Branches> getBranch (Connection connection) {
-		PreparedStatement ps = null;
-		try {
-			String sql = "SELECT * FROM branches ;";
-			ps = connection.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			List<Branches> ret = new ArrayList<Branches>();
-			while (rs.next()) {
-				String name = rs.getString("name");
-				int id = rs.getInt("id");
-				Branches Branches = new Branches();
-				Branches.setId(id);
-				Branches.setName(name);
-				ret.add(Branches);
-			}
-		
-			return ret;
+			ps.setString(1,  id);
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			throw new SQLRuntimeException(e);
 		} finally {

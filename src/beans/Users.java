@@ -2,18 +2,18 @@ package beans;
 
 import java.io.Serializable;
 
-public class Management implements Serializable {
+public class Users implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private int id;
+	
 	private String loginId;
 	private String password;
 	private String account;
+	private int branchId;
+	private int positionId;
 	private String status;
 
-	private String branchName;
-	private String positionName;
-	
 	public int getId() {
 		return id;
 	}
@@ -46,27 +46,27 @@ public class Management implements Serializable {
 		this.account = account;
 	}
 	
+	public int getBranchId() {
+		return branchId;
+	}
+
+	public void setBranchId(int branchId) {
+		this.branchId = branchId;
+	}
+
+	public int getPositionId() {
+		return positionId;
+	}
+
+	public void setPositionId(int positionId) {
+		this.positionId = positionId;
+	}
+
 	public String getStatus() {
 		return status;
 	}
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	
-	public String getBranchName() {
-		return branchName;
-	}
-	
-	public void setBranchName(String branchName) {
-		this.branchName = branchName;
-	}
-	
-	public String getPositionName() {
-		return positionName;
-	}
-	
-	public void setPositionName(String positionName) {
-		this.positionName = positionName;
 	}
 }

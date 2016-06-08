@@ -9,6 +9,8 @@ import java.util.List;
 import beans.Branches;
 import beans.Positions;
 import beans.Users;
+import dao.BranchesDao;
+import dao.PositionsDao;
 import dao.UserDao;
 import utils.CipherUtil;
 
@@ -130,8 +132,8 @@ public class UserService {
 		Connection connection = null;
 		try {
 			connection = getConnection();
-			UserDao userDao = new UserDao();
-			List<Positions> position = userDao.getPosition(connection);
+			PositionsDao positionsDao = new PositionsDao();
+			List<Positions> position = positionsDao.getPosition(connection);
 
 			commit(connection);
 			return position;
@@ -147,8 +149,8 @@ public class UserService {
 		Connection connection = null;
 		try {
 			connection = getConnection();
-			UserDao userDao = new UserDao();
-			List<Branches> branch = userDao.getBranch(connection);
+			BranchesDao branchesDao = new BranchesDao();
+			List<Branches> branch = branchesDao.getBranch(connection);
 
 			commit(connection);
 			return branch;
