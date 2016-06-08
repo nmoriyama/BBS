@@ -23,7 +23,7 @@
 </c:if>
 <form action="signup" method="post"><br />
 	<label for="loginId">ログインID</label>
-	<input name="loginId" value="${insertUser.loginId}" id ="loginId"/> <br />
+	<input name="loginId" value="${loginId}" id ="loginId"/> <br />
 	
 	<label for="password">パスワード</label>
 	<input name="password" type="password"/> <br />
@@ -32,35 +32,30 @@
 	<input name="checkPassword" type="password"/> <br />
 	
 	<label for="account">アカウント名</label>
-	<input name="account" value="${insertUser.account}"/> <br />
+	<input name="account" value="${account}"/> <br />
 	
 	<p><label>支店：
 	<select name="branchId">
-		<option value="1">本社</option>
-		<option value="2">支店Ａ</option>
-		<option value="3">支店Ｂ</option>
-		<option value="4">支店Ｃ</option>
+		<option value="1" <c:if test="${branchId == 1}">selected</c:if>>本社</option>
+		<option value="2" <c:if test="${branchId == 2}">selected</c:if>>支店Ａ</option>
+		<option value="3" <c:if test="${branchId == 3}">selected</c:if>>支店Ｂ</option>
+		<option value="4" <c:if test="${branchId == 4}">selected</c:if>>支店Ｃ</option>
 	</select>
 	</label></p>
 	
 	<p><label>役職：
 	<select name="positionId">
-		<option value="1">人事総務部</option>
-		<option value="2">情報セキュリティ部</option>
-		<option value="3">支店長</option>
-		<option value="4">社員</option>
+		<option value="1" <c:if test="${positionId == 1}">selected</c:if>>人事総務部</option>
+		<option value="2" <c:if test="${positionId == 2}">selected</c:if>>情報セキュリティ部</option>
+		<option value="3" <c:if test="${positionId == 3}">selected</c:if>>支店長</option>
+		<option value="4" <c:if test="${positionId == 4}">selected</c:if>>社員</option>
 	</select>
 	</label></p>
 
-	<p><label>状態：
-	<select name="status">
-		<option value="1">停止中</option>
-		<option value="2">活動中</option>
-	</select>
-	</label></p>
-	
 	<input type="submit" value="登録" /> <br />
-	<a href="./top">戻る</a>
+	<a href="./management">戻る</a>
+	<c:remove var="loginId" scope="session"/>
+	<c:remove var="account" scope="session"/>
 </form>
 <div class="copyright">Copyright(c)Moriyama Naoki</div>
 </div>

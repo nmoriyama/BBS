@@ -26,21 +26,31 @@
 
 <div class="posting-contents">
 <div class="posting">
+	
 	<c:if test="${ not empty loginUser }">
+	<div id = "body">
 		<form action="posting" method="post">
 			<input type = "hidden" name = "id" value = "${loginUser.id}">
 			<p><label for = "subject">件名</label></p>
-			<textarea name="subject" cols="1" rows="1" class="comment-box" id = "subject"></textarea>
+			<input name = "subject" value="${subject}" /><br />
 			<br />
-			<p><label for = "body">本文</label></p>
-			<textarea name="body" cols="1" rows="5" class="comment-box"></textarea>
-			<br />
+		
 			<p><label for = "category">カテゴリー</label></p>
-			<textarea name="category" cols="1" rows="1" class="comment-box"></textarea>
+			<input name = "category" value="${category}" /><br />
 			<br />
+			
+			<p><label for = "body">本文</label></p>
+			<textarea name="body" cols="1" rows="5" class="comment-box" id = "body"><c:out value="${body}" /></textarea>
+			<br />
+			
 			<p><input type="submit" value="投稿" class ="loginText"></p>
+			
 		</form>
+		</div>
 		<a href="./top">戻る</a>
+		<c:remove var="subject" scope="session"/>
+		<c:remove var="body" scope="session"/>
+		<c:remove var="category" scope="session"/>
 	</c:if>
 	</div>
 </div>

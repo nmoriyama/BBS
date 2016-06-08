@@ -8,11 +8,7 @@ import java.util.List;
 
 import bbsSystem.beans.Posting;
 import bbsSystem.beans.UserMessage;
-<<<<<<< HEAD
 import bbsSystem.dao.PostingDao;
-=======
-import bbsSystem.dao.MessageDao;
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 import bbsSystem.dao.UserMessageDao;
 
 public class MessageService {
@@ -23,11 +19,9 @@ public class MessageService {
 		try {
 			connection = getConnection();
 
-<<<<<<< HEAD
+
 			PostingDao messageDao = new PostingDao();
-=======
-			MessageDao messageDao = new MessageDao();
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
+
 			messageDao.insert(connection, posting);
 
 			commit(connection);
@@ -82,16 +76,14 @@ public class MessageService {
 		}
 	}
 	 
-<<<<<<< HEAD
+
 	public List<UserMessage> getPostingSurch(Posting posting) { //絞り込み機能
-=======
-	public List<UserMessage> getPostingSurch(String surch) {
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
+
 		Connection connection = null;
 		try {
 			connection = getConnection();
 			UserMessageDao messageDao = new UserMessageDao();
-<<<<<<< HEAD
+
 			List<UserMessage> ret = messageDao.getPostingSearch(connection, posting);
 			commit(connection);
 			return ret;
@@ -113,9 +105,7 @@ public class MessageService {
 			connection = getConnection();
 			UserMessageDao messageDao = new UserMessageDao();
 			List<String> ret = messageDao.getDate(connection);
-=======
-			List<UserMessage> ret = messageDao.getPostingSearch(connection, surch);
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
+
 			commit(connection);
 			return ret;
 		} catch (RuntimeException e) {

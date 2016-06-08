@@ -45,7 +45,7 @@ public class SettingServlet extends HttpServlet {
 			}
 			new UserService().update(UpdateUser, passwordCheck);
 
-<<<<<<< HEAD
+
 			response.sendRedirect("./management");
 		} else {
 			session.setAttribute("loginId", request.getParameter("loginId"));
@@ -54,10 +54,6 @@ public class SettingServlet extends HttpServlet {
 			session.setAttribute("positionId", Integer.parseInt(request.getParameter("positionId")));
 			session.setAttribute("status", request.getParameter("status"));
 			
-=======
-			response.sendRedirect("./top");
-		} else {
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 			session.setAttribute("errorMessages", messages);
 			response.sendRedirect("setting");
 		}

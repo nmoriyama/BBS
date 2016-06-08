@@ -17,11 +17,9 @@ import javax.servlet.http.HttpSession;
 
 import bbsSystem.beans.User;
 
-<<<<<<< HEAD
+
 @WebFilter(urlPatterns = {"/top", "/management", "/setting", "/signup", "/posting"})
-=======
-@WebFilter(urlPatterns = {"/top", "/management", "/setting", "/signup"})
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
+
 public class LoginFilter implements Filter {
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -30,11 +28,8 @@ public class LoginFilter implements Filter {
 
 			User user = (User) ((HttpServletRequest) request).getSession().getAttribute("loginUser");
 
-<<<<<<< HEAD
 		if (user == null || Integer.parseInt(user.getStatus()) == 1) {
-=======
-		if (user == null ) {
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
+
 			
 			messages.add("ログインしていません。");
 			session.setAttribute("errorMessages", messages);

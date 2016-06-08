@@ -14,13 +14,9 @@ public class Management implements Serializable {
 	private String status;
 	private String name;
 	private String name2;
-<<<<<<< HEAD
 	private String branchName;
 	private String positionName;
 	
-=======
-
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 	public int getId() {
 		return id;
 	}
@@ -91,7 +87,6 @@ public class Management implements Serializable {
 	public void setName2(String name2) {
 		this.name2 = name2;
 	}
-<<<<<<< HEAD
 	
 	public String getBranchName() {
 		return branchName;
@@ -108,6 +103,4 @@ public class Management implements Serializable {
 	public void setPositionName(String positionName) {
 		this.positionName = positionName;
 	}
-=======
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 }

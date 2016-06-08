@@ -11,11 +11,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>掲示板</title>
 	<link href="css/style.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript">
-<!--
 
--->
-</script>
 </head>
 <body>
 
@@ -61,47 +57,47 @@
  	<tr>
 		<th>日付</th>
 			<td>
+				<select name="toYear">
+					<c:forEach begin="${firstYear }" end="${lastYear }" var="i">
+						<option <c:if test="${i == lastYear }">selected</c:if>>
+						<c:out value="${i}" /></option>
+					</c:forEach>
+				</select>年
+				
+				<select name="toMonth">
+					<c:forEach begin="1" end="12" var="i">
+						<option <c:if test="${i == lastMonth }">selected</c:if>>
+						<c:out value="${i}" /></option>
+					</c:forEach>
+				</select>月
+				
+				<select name="toDay">
+					<c:forEach begin="1" end="31" var="i">
+						<option <c:if test="${i == lastDay }">selected</c:if>>
+						<c:out value="${i}" /></option>
+					</c:forEach>
+				</select>日 ～～
+
 				<select name="fromYear">
-					<c:forEach begin="1994" end="2016" var="i">
-						<option <c:if test="${i + currentYear == year }">selected</c:if>>
+					<c:forEach begin="${firstYear }" end="${lastYear }" var="i">
+						<option <c:if test="${i == lastYear }">selected</c:if>>
 						<c:out value="${i + currentYear}" /></option>
 					</c:forEach>
 				</select>年
 				
 				<select name="fromMonth">
-					<c:forEach begin="0" end="11" var="i">
-						<option <c:if test="${i == month }">selected</c:if>>
-						<c:out value="${i + 1}" /></option>
+					<c:forEach begin="1" end="12" var="i">
+						<option <c:if test="${i == firstMonth }">selected</c:if>>
+						<c:out value="${i}" /></option>
 					</c:forEach>
 				</select>月
 				
-				<select name="fromDate">
+				<select name="fromDay">
 					<c:forEach begin="1" end="31" var="i">
-						<option <c:if test="${i == date }">selected</c:if>>
+						<option <c:if test="${i == firstDay }">selected</c:if>>
 						<c:out value="${i}" /></option>
 					</c:forEach>
-				</select>日 ～～
-
-				<select name="toYear">
-					<c:forEach begin="1994" end="2016" var="i">
-						<option <c:if test="${i + currentYear == year }">selected</c:if>>
-						<c:out value="${i + currentYear}" /></option>
-					</c:forEach>
-				</select>年
-				
-				<select name="toMonth">
-					<c:forEach begin="0" end="11" var="i">
-						<option <c:if test="${i == month }">selected</c:if>>
-						<c:out value="${i + 1}" /></option>
-					</c:forEach>
-				</select>月
-				
-				<select name="toDate">
-					<c:forEach begin="1" end="31" var="i">
-						<option <c:if test="${i == date }">selected</c:if>>
-						<c:out value="${i}" /></option>
-					</c:forEach>
-				</select>日
+				</select>
 			</td>
 		</tr>
 	</table>
@@ -114,17 +110,19 @@
 			件名:<c:out value="${posting.subject}" /><span style="margin-right: 24em;"></span>
 			         カテゴリー:<c:out value="${posting.category}" /></div>
 			
-			アカウント:<c:out value="${posting.account}" /><span style="margin-right: 24em;"></span>
+			投稿者:<c:out value="${posting.account}" /><span style="margin-right: 24em;"></span>
 			日付:<fmt:formatDate value="${posting.date}" pattern="yyyy/MM/dd HH:mm:ss" /></div>
 			
 			<u><div class="body">本文:<c:out value="${posting.body}" /></div></u>
 			
 			<div class="top">
+			<br>
 			<c:forEach items="${comments}" var="comment">
 				<c:choose>
 					<c:when test = "${comment.postingId == posting.id}">
 						<div class="top">名前:<c:out value="${comment.account}" /></div>
 						<div class="top">コメント:<c:out value="${comment.body}" /></div>
+						<br>
 					</c:when>
 				</c:choose>
 			</c:forEach>

@@ -1,7 +1,6 @@
 package bbsSystem.beans;
 
 public class UpdateUser {
-<<<<<<< HEAD
 	private int id;
 	private String loginId;
 	private String password;
@@ -74,7 +73,4 @@ public class UpdateUser {
 	public void setStatus(String status) {
 		this.status = status;
 	}
-=======
-
->>>>>>> 8d617aec4efbb8f139cf04341be0a1ac52545286
 }
