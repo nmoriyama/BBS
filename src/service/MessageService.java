@@ -68,14 +68,14 @@ public class MessageService {
 	}
 	 
 
-	public List<UserMessage> getPostingSurch(Postings posting, int count) { //絞り込み機能
+	public List<UserMessage> getPostingSurch(Postings posting) { //絞り込み機能
 
 		Connection connection = null;
 		try {
 			connection = getConnection();
 			UserMessageDao messageDao = new UserMessageDao();
 
-			List<UserMessage> ret = messageDao.getPostingSearch(connection, posting, count);
+			List<UserMessage> ret = messageDao.getPostingSearch(connection, posting);
 			commit(connection);
 			return ret;
 		} catch (RuntimeException e) {

@@ -28,41 +28,39 @@ public class HomeServlet extends HttpServlet {
 		String fromDate;
 		String toDate;
 		Postings posting = new Postings();
-		if (request.getParameter("fromYear") != null) {
-			fromDate = request.getParameter("fromYear")+"-"+request.getParameter("fromMonth")+"-"+request.getParameter("fromDay")+" 23:59:59";
-			toDate = request.getParameter("toYear")+"-"+request.getParameter("toMonth")+"-"+request.getParameter("toDay")+" 00:00:00";
-			request.setAttribute("firstYear", request.getParameter("fromYear"));
-			request.setAttribute("firstMonth", request.getParameter("fromMonth"));
-			request.setAttribute("firstDay", request.getParameter("fromDay"));
-			request.setAttribute("lastYear", request.getParameter("toYear"));
-			request.setAttribute("lastMonth", request.getParameter("toMonth"));
-			request.setAttribute("lastDay", request.getParameter("toDay"));
-			System.out.println(request.getParameter("Day"));
+		if (request.getParameter("toDate") != null) {
+			fromDate = request.getParameter("fromDate") + " 00:00:00";
+			toDate = request.getParameter("toDate") + " 23:59:59";
+			String[] fromDate1 = request.getParameter("fromDate").split("-", 0);
+			String[] toDate1 = request.getParameter("toDate").split("-", 0);
+			
+			request.setAttribute("fromYear", fromDate1[0]);
+			request.setAttribute("fromMonth", fromDate1[1]);
+			request.setAttribute("fromDay", fromDate1[2]);
+			request.setAttribute("toYear", toDate1[0]);
+			request.setAttribute("toMonth", toDate1[1]);
+			request.setAttribute("toDay", toDate1[2]);
+			
 		} else {
 			fromDate = date.get(0)+"-"+date.get(1)+"-"+date.get(2)+" 23:59:59";
 			toDate = date.get(3)+"-"+date.get(4)+"-"+date.get(5)+" 00:00:00";
-			request.setAttribute("firstYear", date.get(0));
-			request.setAttribute("firstMonth", date.get(1));
-			request.setAttribute("firstDay", date.get(2));
-			request.setAttribute("lastYear", date.get(3));
-			request.setAttribute("lastMonth", date.get(4));
-			request.setAttribute("lastDay", date.get(5));
+			request.setAttribute("fromYear", date.get(0));
+			request.setAttribute("fromMonth", date.get(1));
+			request.setAttribute("fromDay", date.get(2));
+			request.setAttribute("toYear", date.get(3));
+			request.setAttribute("toMonth", date.get(4));
+			request.setAttribute("toDay", date.get(5));
 		}
-		int count = 1;
 		String SearchCategory = request.getParameter("category");
-		try{
-			if (SearchCategory == null || SearchCategory.length() == 1) {
-				count = 0;
-			}
-		} catch(NumberFormatException e) {
-			count = 0;
+		if (request.getParameter("category") == null) {
+			SearchCategory = "";
 		}
 		List<String> category = new MessageService().getCategory();
 		
 		posting.setFromDate(fromDate);
 		posting.setToDate(toDate);
 		posting.setSurchCategory(SearchCategory);
-		List<UserMessage> postings = new MessageService().getPostingSurch(posting, count);
+		List<UserMessage> postings = new MessageService().getPostingSurch(posting);
 		request.setAttribute("SearchCategory", SearchCategory);
 		request.setAttribute("users", user);
 		request.setAttribute("postings", postings);

@@ -23,7 +23,7 @@
 				がログイン中
 			</h2>
 			<a href = "posting">新規投稿</a>
-			<c:if test = "${ loginUser.positionId  ==  1 }">
+			<c:if test = "${ loginUser.positionId == 1 }">
 				<a href = "management">ユーザー管理</a>
 			</c:if>
 			<a href = "logout">ログアウト</a>
@@ -46,49 +46,50 @@
 	
 	<div Align = "left">
 		カテゴリー<br> <select name = "category">
-			<option value = "0">全てを表示</option>
+			<option value = "">全てを表示</option>
 			<c:forEach items = "${ category }" var = "category">
-				<option <c:if test = "${ SearchCategory  ==  category }">selected</c:if>>
+				<option <c:if test = "${ SearchCategory == category }">selected</c:if>>
 				<c:out value = "${ category }" /></option>
 			</c:forEach>
 		</select>
 	</div>
 	
 	<div Align = "left">日付<br></div>
-		<select name = "toYear">
-			<c:forEach begin = "${ firstYear }" end = "${ lastYear }" var = "i">
-				<option <c:if test = "${ i  ==  lastYear }">selected</c:if>>
+		<select>
+			<c:forEach begin = "${ fromYear }" end = "${ toYear }" var = "i">
+				<option <c:if test = "${ i == fromYear }">selected</c:if>>
 					<c:out value = "${ i }" /></option>
 			</c:forEach>
-		</select>年 <select name = "toMonth">
+		</select>年 <select>
 			<c:forEach begin = "1" end = "12" var = "i">
-				<option <c:if test = "${ i  ==  lastMonth }">selected</c:if>>
+				<option <c:if test = "${ i == fromMonth }">selected</c:if>>
 					<c:out value = "${ i }" /></option>
 			</c:forEach>
-		</select>月 <select name = "toDay">
+		</select>月 <select>
 			<c:forEach begin = "1" end = "31" var = "i">
-				<option <c:if test = "${ i  ==  lastDay }">selected</c:if>>
+				<option <c:if test = "${ i == fromDay }">selected</c:if>>
 					<c:out value = "${ i }" /></option>
 			</c:forEach>
 		</select>日 から 
-		<input type = "hidden" name = "Day" value = "${toYear+toMonth}">
-		<select name = "fromYear">
-			<c:forEach begin = "${ firstYear }" end = "${ lastYear }" var = "i">
-				<option <c:if test = "${ i  ==  lastYear }">selected</c:if>>
+		
+		<select>
+			<c:forEach begin = "${ fromYear }" end = "${ toYear }" var = "i">
+				<option <c:if test = "${ i == toYear }">selected</c:if>>
 					<c:out value = "${ i + currentYear }" /></option>
 			</c:forEach>
-		</select>年 <select name = "fromMonth">
+		</select>年 <select>
 			<c:forEach begin = "1" end = "12" var = "i">
-				<option <c:if test = "${ i  ==  firstMonth }">selected</c:if>>
+				<option <c:if test = "${ i == toMonth }">selected</c:if>>
 					<c:out value = "${ i }" /></option>
 			</c:forEach>
-		</select>月 <select name = "fromDay">
+		</select>月 <select>
 			<c:forEach begin = "1" end = "31" var = "i">
-				<option <c:if test = "${ i  ==  firstDay }">selected</c:if>>
+				<option <c:if test = "${ i == toDay }">selected</c:if>>
 					<c:out value = "${ i }" /></option>
 			</c:forEach>
 		</select>日
-
+		<input type = "hidden" name = "fromDate" value = "${ fromYear }-${ fromMonth }-${ fromDay }">
+		<input type = "hidden" name = "toDate" value = "${ toYear }-${ toMonth }-${ toDay }">
 		<div class = "botton"><input type = "submit" value = "検索"></div>
 	</form><br>
 
@@ -117,10 +118,10 @@
 			</div>
 			<form action = "deletePosting" method = "post">
 				<input type = "hidden" name = "id" value = "${ posting.id }">
-				<c:if test = "${ loginUser.branchId !=  1 && loginUser.positionId  ==  3 && loginUser.branchId  ==  posting.branchId }">
+				<c:if test = "${ loginUser.branchId != 1 && loginUser.positionId == 3 && loginUser.branchId == posting.branchId }">
 					<input type = "submit" value = "削除">
 				</c:if>
-				<c:if test = "${ loginUser.positionId  ==  2 }">
+				<c:if test = "${ loginUser.positionId == 2 }">
 					<input type = "submit" value = "削除">
 				</c:if>
 			</form>
@@ -130,7 +131,7 @@
 		<div class = "comment-text"> 
 			<c:forEach items = "${ comments }" var = "comment">
 				<c:choose>
-					<c:when test = "${ comment.postingId  ==  posting.id }">
+					<c:when test = "${ comment.postingId == posting.id }">
 						<div Align = "left">
 							名前:<c:out value = "${ comment.account }" />
 							&nbsp; コメント<br>
@@ -142,10 +143,10 @@
 						</div>
 						<form action = "deleteComment" method = "post">
 							<input type = "hidden" name = "id" value = "${ comment.id }">
-							<c:if test = "${ loginUser.branchId !=  1 && loginUser.positionId  ==  3 && loginUser.branchId  ==  comment.branchId }">
+							<c:if test = "${ loginUser.branchId !=  1 && loginUser.positionId == 3 && loginUser.branchId == comment.branchId }">
 								<input type = "submit" value = "削除">
 							</c:if>
-							<c:if test = "${ loginUser.positionId  ==  2 }">
+							<c:if test = "${ loginUser.positionId == 2 }">
 								<input type = "submit" value = "削除">
 							</c:if>
 						</form><br>

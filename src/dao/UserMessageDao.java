@@ -55,17 +55,17 @@ public class UserMessageDao {
 		}
 	}
 	
-	public List<UserMessage> getPostingSearch(Connection connection,Postings posting,int count) {
+	public List<UserMessage> getPostingSearch(Connection connection,Postings posting) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			//投稿を表示
 			sql.append("SELECT * FROM postings  INNER JOIN users ON user_id = users.id ");
 			
-			sql.append(" AND ? >= record_date ");  //
 			sql.append(" AND ? <= record_date "); 
+			sql.append(" AND ? >= record_date ");  //
 			
-			if (count != 0 || posting.getSurchCategory() == "0") {
+			if (!posting.getSurchCategory().isEmpty()) {
 				sql.append(" AND ? = category ");          //カテゴリーに
 			}
 			
@@ -74,11 +74,9 @@ public class UserMessageDao {
 		
 			ps.setString(1,  posting.getFromDate());
 			ps.setString(2,  posting.getToDate());
-			
-			if (count != 0 || posting.getSurchCategory() == "0") {
+			if (!posting.getSurchCategory().isEmpty()) {
 				ps.setString(3,  posting.getSurchCategory());
 			}
-			
 			ResultSet rs = ps.executeQuery();
 			List<UserMessage> ret = toUserPostingList(rs);
 
@@ -104,7 +102,6 @@ public class UserMessageDao {
  				int branchId = rs.getInt("branch_id");
  				String account = rs.getString("account");
  				
- 				System.out.println(id);
  				posting.setPostingId(postingId);
  				posting.setBranchId(branchId);
  				posting.setId(id);
@@ -159,7 +156,7 @@ public class UserMessageDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			//投稿を表示
-			sql.append("SELECT * FROM postings  INNER JOIN users ON user_id = users.id ORDER BY record_date DESC");
+			sql.append("SELECT * FROM postings  INNER JOIN users ON user_id = users.id ORDER BY record_date ASC");
 			
 			ps = connection.prepareStatement(sql.toString());
 			
