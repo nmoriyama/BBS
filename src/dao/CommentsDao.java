@@ -46,7 +46,7 @@ public class CommentsDao {
 		try {
 			StringBuilder sql = new StringBuilder();
 			//投稿を表示
-			sql.append("SELECT * FROM UserComments;");
+			sql.append("SELECT * FROM UserComments ;");
 			
 			ps = connection.prepareStatement(sql.toString());
 
@@ -67,12 +67,14 @@ public class CommentsDao {
  			while (rs.next()) {
  				UserComments comment = new UserComments();
  				
+ 				int id = rs.getInt("id");
  				String body = rs.getString("body");
  				int userId = rs.getInt("user_id");
  				int postingId = rs.getInt("posting_id");
  				int branchId = rs.getInt("branch_id");
  				String account = rs.getString("account");
  				
+ 				comment.setId(id);
  				comment.setPostingId(postingId);
  				comment.setBranchId(branchId);
  				comment.setBody(body);
@@ -91,12 +93,11 @@ public class CommentsDao {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
-			sql.append("DELETE FROM comments WHERE id = ?;");
+			sql.append("DELETE FROM comments WHERE id = ? ;");
 			
 			ps = connection.prepareStatement(sql.toString());	
 			
 			ps.setString(1,  commentId);
-			
 			ps.executeUpdate();
 		} catch(SQLException e) {
 			throw new SQLRuntimeException(e);
