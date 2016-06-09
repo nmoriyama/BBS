@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.PostingDao;
+import dao.PostingsDao;
 
 @WebServlet(urlPatterns = {"/deletePosting"})
 public class DeletePostingServlet extends HttpServlet {
@@ -29,7 +29,7 @@ public class DeletePostingServlet extends HttpServlet {
 		List<String> message = new ArrayList<String>();
 		try {
 			connection = getConnection();
-			PostingDao.delete(connection, request.getParameter("id"));
+			PostingsDao.delete(connection, request.getParameter("id"));
 			message.add("投稿を削除しました");
 			session.setAttribute("messages", message);
 			commit(connection);

@@ -55,41 +55,39 @@
 	</div>
 	
 	<div Align = "left">日付<br></div>
-		<select>
-			<c:forEach begin = "${ fromYear }" end = "${ toYear }" var = "i">
-				<option <c:if test = "${ i == fromYear }">selected</c:if>>
+		<select name="fromYear">
+			<c:forEach begin = "${ firstYear }" end = "${ lastYear }" var = "i">
+				<option <c:if test = "${ i == firstYear }">selected</c:if>>
 					<c:out value = "${ i }" /></option>
 			</c:forEach>
-		</select>年 <select>
+		</select>年 <select name="fromMonth">
 			<c:forEach begin = "1" end = "12" var = "i">
-				<option <c:if test = "${ i == fromMonth }">selected</c:if>>
+				<option <c:if test = "${ i == firstMonth }">selected</c:if>>
 					<c:out value = "${ i }" /></option>
 			</c:forEach>
-		</select>月 <select>
+		</select>月 <select name="fromDay">
 			<c:forEach begin = "1" end = "31" var = "i">
-				<option <c:if test = "${ i == fromDay }">selected</c:if>>
+				<option <c:if test = "${ i == firstDay }">selected</c:if>>
 					<c:out value = "${ i }" /></option>
 			</c:forEach>
 		</select>日 から 
 		
-		<select>
-			<c:forEach begin = "${ fromYear }" end = "${ toYear }" var = "i">
-				<option <c:if test = "${ i == toYear }">selected</c:if>>
+		<select name = "toYear">
+			<c:forEach begin = "${ firstYear }" end = "${ lastYear }" var = "i">
+				<option <c:if test = "${ i == lastYear }">selected</c:if>>
 					<c:out value = "${ i + currentYear }" /></option>
 			</c:forEach>
-		</select>年 <select>
+		</select>年 <select name = "toMonth">
 			<c:forEach begin = "1" end = "12" var = "i">
-				<option <c:if test = "${ i == toMonth }">selected</c:if>>
+				<option <c:if test = "${ i == lastMonth }">selected</c:if>>
 					<c:out value = "${ i }" /></option>
 			</c:forEach>
-		</select>月 <select>
+		</select>月 <select name = "toDay">
 			<c:forEach begin = "1" end = "31" var = "i">
-				<option <c:if test = "${ i == toDay }">selected</c:if>>
+				<option <c:if test = "${ i == lastDay }">selected</c:if>>
 					<c:out value = "${ i }" /></option>
 			</c:forEach>
 		</select>日
-		<input type = "hidden" name = "fromDate" value = "${ fromYear }-${ fromMonth }-${ fromDay }">
-		<input type = "hidden" name = "toDate" value = "${ toYear }-${ toMonth }-${ toDay }">
 		<div class = "botton"><input type = "submit" value = "検索"></div>
 	</form><br>
 

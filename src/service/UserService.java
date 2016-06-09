@@ -11,7 +11,7 @@ import beans.Positions;
 import beans.Users;
 import dao.BranchesDao;
 import dao.PositionsDao;
-import dao.UserDao;
+import dao.UsersDao;
 import utils.CipherUtil;
 
 public class UserService {
@@ -24,7 +24,7 @@ public class UserService {
 			String encPassword = CipherUtil.encrypt(insertUser.getPassword());
 			insertUser.setPassword(encPassword);
 
-			UserDao userDao = new UserDao();
+			UsersDao userDao = new UsersDao();
 			message = userDao.insert(connection, insertUser);
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -45,7 +45,7 @@ public class UserService {
 			String encPassword = CipherUtil.encrypt(user.getPassword());
 			user.setPassword(encPassword);
 
-			UserDao userDao = new UserDao();
+			UsersDao userDao = new UsersDao();
 			message = userDao.update(connection, user, passwordCheck);
 
 			commit(connection);
@@ -64,7 +64,7 @@ public class UserService {
 		try {
 			connection = getConnection();
 
-			UserDao userDao = new UserDao();
+			UsersDao userDao = new UsersDao();
 			Users user = userDao.getUser(connection, loginId, password);
 
 			commit(connection);
@@ -83,7 +83,7 @@ public class UserService {
 		try {
 			connection = getConnection();
 
-			UserDao userDao = new UserDao();
+			UsersDao userDao = new UsersDao();
 			userDao.status(connection, user);
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -99,7 +99,7 @@ public class UserService {
 		try {
 			connection = getConnection();
 
-			UserDao userDao = new UserDao();
+			UsersDao userDao = new UsersDao();
 			userDao.delete(connection, id);
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -114,7 +114,7 @@ public class UserService {
 		Connection connection = null;
 		try {
 			connection = getConnection();
-			UserDao userDao = new UserDao();
+			UsersDao userDao = new UsersDao();
 			Users user = userDao.getUpdateUser(connection, loginId);
 
 			commit(connection);

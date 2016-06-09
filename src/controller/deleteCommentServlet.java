@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dao.CommentDao;
+import dao.CommentsDao;
 
 @WebServlet(urlPatterns = {"/deleteComment"})
 public class DeleteCommentServlet  extends HttpServlet{
@@ -29,7 +29,7 @@ public class DeleteCommentServlet  extends HttpServlet{
 		List<String> message = new ArrayList<String>();
 		try {
 			connection = getConnection();
-			CommentDao.delete(connection, request.getParameter("id"));
+			CommentsDao.delete(connection, request.getParameter("id"));
 			message.add("コメントを削除しました");
 			session.setAttribute("messages", message);
 			commit(connection);

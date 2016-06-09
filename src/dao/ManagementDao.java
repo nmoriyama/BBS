@@ -9,20 +9,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import beans.Management;
+import beans.ManagementUsers;
 import exception.SQLRuntimeException;
 
 public class ManagementDao {
-	public  List<Management> select(Connection connection) {
+	public  List<ManagementUsers> select(Connection connection) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
 			//投稿を表示
-			sql.append("SELECT * FROM management;");
+			sql.append("SELECT * FROM management ;");
 			
 			ps = connection.prepareStatement(sql.toString());
 			ResultSet rs = ps.executeQuery();
-			List<Management> ret = toUserList(rs);
+			List<ManagementUsers> ret = toUserList(rs);
 			return ret;
 		} catch(SQLException e) {
 			throw new SQLRuntimeException(e);
@@ -31,8 +31,8 @@ public class ManagementDao {
 		}
 	}
 	
-	private static List<Management> toUserList(ResultSet rs) throws SQLException {
-		List<Management> ret = new ArrayList<Management>();
+	private static List<ManagementUsers> toUserList(ResultSet rs) throws SQLException {
+		List<ManagementUsers> ret = new ArrayList<ManagementUsers>();
 	
  		try {
  			while (rs.next()) {
@@ -44,7 +44,7 @@ public class ManagementDao {
  				String branchName = rs.getString("branchName");
  				String positionName = rs.getString("positionName");
  				
- 				Management posting = new Management();
+ 				ManagementUsers posting = new ManagementUsers();
  				
  				posting.setId(id);
  				posting.setLoginId(loginId);

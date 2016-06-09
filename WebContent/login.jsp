@@ -28,18 +28,20 @@
 			<p>
 				<label for = "loginId">ログインID</label>
 			</p>
-			<input name = "loginId" id = "loginId" /><br />
+			<input name = "loginId" value = "${ loginId }" /><br />
 
 			<p>
 				<label for = "password">パスワード</label>
 			</p>
-			<input name = "password" type = "password" id = "password" /><br />
+			<input name = "password" type = "password"  /><br />
 
 			<p>
 				<input type = "submit" value = "ログイン" /><br />
 			</p>
 		</form>
+		<c:remove var = "loginId" scope = "session" />
 	</div>
+	
 	<div class = "copyright">Copyright(c)Moriyama Naoki</div>
 	
 </body>

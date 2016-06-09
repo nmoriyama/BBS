@@ -6,21 +6,18 @@ import static utils.DBUtil.*;
 import java.sql.Connection;
 import java.util.List;
 
-import beans.Management;
-import beans.UserMessage;
+import beans.ManagementUsers;
+import beans.UserPostings;
 import dao.ManagementDao;
-import dao.UserMessageDao;
-
-
+import dao.PostingsDao;
 
 public class ManagementService {
-	public List<Management> getUsers() {
-
+	public List<ManagementUsers> getUsers() {
 		Connection connection = null;
 		try {
 			connection = getConnection();
 			ManagementDao managementDao = new ManagementDao();
-			List<Management> ret = managementDao.select(connection);
+			List<ManagementUsers> ret = managementDao.select(connection);
 			commit(connection);
 			return ret;
 		} catch (RuntimeException e) {
@@ -34,13 +31,12 @@ public class ManagementService {
 		}
 	}
 	
-	public List<UserMessage> getPosting() {
-
+	public List<UserPostings> getPosting() {
 		Connection connection = null;
 		try {
 			connection = getConnection();
-			UserMessageDao messageDao = new UserMessageDao();
-			List<UserMessage> ret = messageDao.getPosting(connection);
+			PostingsDao PostingsDao = new PostingsDao();
+			List<UserPostings> ret = PostingsDao.getPosting(connection);
 			commit(connection);
 			return ret;
 		} catch (RuntimeException e) {

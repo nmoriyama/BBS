@@ -6,17 +6,15 @@ import static utils.DBUtil.*;
 import java.sql.Connection;
 
 import beans.Comments;
-import dao.CommentDao;
+import dao.CommentsDao;
 
 public class CommentService {
 	public void register(Comments comment) {
-
 		Connection connection = null;
 		try {
 			connection = getConnection();
 			//SQL文の実行に移動
-			CommentDao.insert(connection, comment);
-
+			CommentsDao.insert(connection, comment);
 			commit(connection);
 		} catch (RuntimeException e) {
 			rollback(connection);

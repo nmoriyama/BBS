@@ -61,12 +61,8 @@ public class SettingServlet extends HttpServlet {
 			
 			String message = new UserService().update(UpdateUser, passwordCheck);
 			
-			if (!message.isEmpty()){//入力したログインIDが登録済み
+			if (!message.isEmpty()) {//入力したログインIDが登録済み
 				messages.add(message);
-				/*session.setAttribute("loginId", request.getParameter("loginId"));
-				session.setAttribute("account", request.getParameter("account"));
-				session.setAttribute("branchId", Integer.parseInt(request.getParameter("branchId")));
-				session.setAttribute("positionId", Integer.parseInt(request.getParameter("positionId")));*/
 				session.setAttribute("id", request.getParameter("id"));
 				session.setAttribute("messages", messages);
 				response.sendRedirect("setting");
@@ -78,9 +74,6 @@ public class SettingServlet extends HttpServlet {
 			}
 		} else {
 			session.setAttribute("id", request.getParameter("id"));
-			/*session.setAttribute("account", request.getParameter("account"));
-			session.setAttribute("branchId", Integer.parseInt(request.getParameter("branchId")));
-			session.setAttribute("positionId", Integer.parseInt(request.getParameter("positionId")));*/
 			
 			session.setAttribute("messages", messages);
 			response.sendRedirect("setting");

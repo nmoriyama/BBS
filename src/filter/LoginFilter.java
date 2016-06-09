@@ -21,23 +21,22 @@ import beans.Users;
 @WebFilter(urlPatterns = {"/home", "/management", "/setting", "/signup", "/posting"})
 
 public class LoginFilter implements Filter {
-	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		HttpSession session = ((HttpServletRequest) request).getSession();
 		List<String> messages = new ArrayList<String>();
 
-			Users user = (Users) ((HttpServletRequest) request).getSession().getAttribute("loginUser");
+		Users user = (Users) ((HttpServletRequest) request).getSession().getAttribute("loginUser");
 
 		if (user == null) {
 			messages.add("ログインできません");
 			session.setAttribute("messages", messages);
 			((HttpServletResponse) response).sendRedirect("login");
-		}else if (Integer.parseInt(user.getStatus()) == 1) {
+		} else if (Integer.parseInt(user.getStatus()) == 1) {
 			messages.add("ログインできません");
 			session.setAttribute("messages", messages);
 			((HttpServletResponse) response).sendRedirect("login");
-		}else{
+		} else {
 			chain.doFilter(request, response);
 		}
 	}

@@ -12,16 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Postings;
-import service.MessageService;
+import service.PostingService;
 
 @WebServlet(urlPatterns = {"/posting"})
 public class PostingServlet extends HttpServlet {
-
+	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-
 		request.getRequestDispatcher("posting.jsp").forward(request, response);
 	}
 	
@@ -30,7 +29,6 @@ public class PostingServlet extends HttpServlet {
 			HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		List<String> messages = new ArrayList<String>();
-
 		if (isValid(request, messages) == true) {
 			Postings posting = new Postings();
 			//件名、本文、カテゴリー、登録日時、登録者
@@ -43,7 +41,7 @@ public class PostingServlet extends HttpServlet {
 			posting.setUserId(Integer.parseInt(request.getParameter("id")));
 			messages.add("投稿に成功しました");
 			session.setAttribute("messages", messages);
-			new MessageService().register(posting);
+			new PostingService().register(posting);
 			response.sendRedirect("./home");
 		} else {
 			session.setAttribute("body", request.getParameter("body"));

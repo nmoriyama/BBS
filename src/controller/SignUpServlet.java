@@ -22,7 +22,6 @@ import service.UserService;
 public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
@@ -37,7 +36,6 @@ public class SignUpServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws IOException, ServletException {
-
 		List<String> messages = new ArrayList<String>();
 
 		HttpSession session = request.getSession();
@@ -51,7 +49,7 @@ public class SignUpServlet extends HttpServlet {
 
 			String message = new UserService().register(insertUser);
 			
-			if (!message.isEmpty()){
+			if (!message.isEmpty()) {
 				messages.add(message);
 				session.setAttribute("loginId", request.getParameter("loginId"));
 				session.setAttribute("account", request.getParameter("account"));
@@ -84,7 +82,6 @@ public class SignUpServlet extends HttpServlet {
 		String checkPassword = request.getParameter("checkPassword");
 		int branchId = Integer.parseInt(request.getParameter("branchId"));
 		int positionId = Integer.parseInt(request.getParameter("positionId"));
-		
 		
 		if (StringUtils.isEmpty(loginId) == true) {
 			messages.add("ログインIDを入力してください");

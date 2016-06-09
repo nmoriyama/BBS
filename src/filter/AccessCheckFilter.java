@@ -31,14 +31,13 @@ public class AccessCheckFilter implements Filter {
 			messages.add("ログインしていません");
 			session.setAttribute("messages", messages);
 			((HttpServletResponse) response).sendRedirect("login");
-		}else if (user.getPositionId() == 1 && user.getBranchId() == 1) {	
+		} else if (user.getPositionId() == 1 && user.getBranchId() == 1) {	
 			chain.doFilter(request, response);
-		}else{
+		} else{
 			messages.add("アクセスできません");
 			session.setAttribute("messages", messages);
 			((HttpServletResponse) response).sendRedirect("home");
 		}
-		
 	}
 			
 	public void init(FilterConfig config) {

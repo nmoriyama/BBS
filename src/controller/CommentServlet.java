@@ -16,6 +16,7 @@ import beans.Users;
 import service.CommentService;
 @WebServlet(urlPatterns = {"/comment"})
 public class CommentServlet extends HttpServlet{
+	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doPost(HttpServletRequest request, 

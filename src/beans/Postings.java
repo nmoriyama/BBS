@@ -13,6 +13,8 @@ private static final long serialVersionUID = 1L;
 	private String category;
 	private Date date;
 	private int userId;
+	
+	//別に作る
 	private String account;
 	private String fromDate;
 	private String toDate;

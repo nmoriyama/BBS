@@ -14,6 +14,7 @@ import service.LoginService;
 
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet (HttpServletRequest request, 
@@ -29,8 +30,14 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		LoginService loginService = new LoginService();
 		Users user = loginService.login(loginId, password);
+		
+		if (user == null) {
+			session.setAttribute("loginId", request.getParameter("loginId"));
+			System.out.println(request.getParameter("loginId"));
+		} else if (Integer.parseInt(user.getStatus()) == 1) {
+			session.setAttribute("loginId", request.getParameter("loginId"));
+		}
 		session.setAttribute("loginUser", user);
-
 		response.sendRedirect("home");
 	}
 }

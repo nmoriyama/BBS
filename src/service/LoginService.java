@@ -6,16 +6,15 @@ import static utils.DBUtil.*;
 import java.sql.Connection;
 
 import beans.Users;
-import dao.UserDao;
+import dao.UsersDao;
 import utils.CipherUtil;
 
 public class LoginService {
-	
 	public Users login (String loginId, String password) {
 		Connection connection = null;
 		try {
 			connection = getConnection();
-			UserDao userDao = new UserDao();
+			UsersDao userDao = new UsersDao();
 			String encPassword = CipherUtil.encrypt(password);
 			Users user = userDao.getUser(connection, loginId, encPassword);
 
