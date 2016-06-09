@@ -61,8 +61,9 @@ public class UsersDao {
 	public Users getUser(Connection connection, String loginId, String password) {
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users WHERE login_id = ? AND password = ? ;";
-			ps = connection.prepareStatement(sql);
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM users WHERE login_id = ? AND password = ? ;");
+			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, loginId);
 			ps.setString(2, password);
 			ResultSet rs = ps.executeQuery();
@@ -113,8 +114,9 @@ public class UsersDao {
 	public Users getUpdateUser(Connection connection, String id) {
 		PreparedStatement ps = null;
 		try {
-			String sql = "SELECT * FROM users WHERE id = ? ;";
-			ps = connection.prepareStatement(sql);
+			StringBuilder sql = new StringBuilder();
+			sql.append("SELECT * FROM users WHERE id = ? ;");
+			ps = connection.prepareStatement(sql.toString());
 			ps.setString(1, id);
 			ResultSet rs = ps.executeQuery();
 			List<Users> userList = toUserList(rs);
@@ -155,7 +157,7 @@ public class UsersDao {
 			sql.append("branch_id = ?, ");
 			sql.append("position_id = ? ");
 			if (passwordCheck == 0) {
-				sql.append("password = ?, ");
+				sql.append(", password = ? ");
 			}
 			sql.append(" WHERE ");
 			sql.append(" id = ? ;");
@@ -208,8 +210,9 @@ public class UsersDao {
 	public void delete(Connection connection, String id) {
 		PreparedStatement ps = null;
 		try {
-			String sql = "DELETE FROM users WHERE id = ? ;";
-			ps = connection.prepareStatement(sql);
+			StringBuilder sql = new StringBuilder();
+			sql.append("DELETE FROM users WHERE id = ? ;");
+			ps =  connection.prepareStatement(sql.toString());
 			ps.setString(1, id);
 			ps.executeUpdate();
 		} catch (SQLException e) {

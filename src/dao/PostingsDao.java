@@ -47,9 +47,8 @@ public class PostingsDao {
 	public List<String> getCategory(Connection connection) {
 		PreparedStatement ps = null;
 		try {
-			StringBuilder sql = new StringBuilder();
 			//投稿を表示
-			sql.append("SELECT category FROM postings ;");
+			String sql = "SELECT category FROM postings ;";
 			
 			ps = connection.prepareStatement(sql.toString());
 			
@@ -67,9 +66,8 @@ public class PostingsDao {
 	public List<String> getDate(Connection connection) {
 		PreparedStatement ps = null;
 		try {
-			StringBuilder sql = new StringBuilder();
 			//投稿を表示
-			sql.append("SELECT * FROM postings INNER JOIN users ON user_id = users.id ORDER BY record_date ASC ;");
+			String sql = "SELECT * FROM postings INNER JOIN users ON user_id = users.id ORDER BY record_date ASC ;";
 			
 			ps = connection.prepareStatement(sql.toString());
 			
@@ -132,9 +130,8 @@ public class PostingsDao {
 	public List<UserPostings> getPosting(Connection connection) {
 		PreparedStatement ps = null;
 		try {
-			StringBuilder sql = new StringBuilder();
 			//投稿を表示
-			sql.append("SELECT * FROM UserPostings ;");
+			String sql = "SELECT * FROM UserPostings ;";
 			
 			ps = connection.prepareStatement(sql.toString());
 			ResultSet rs = ps.executeQuery();

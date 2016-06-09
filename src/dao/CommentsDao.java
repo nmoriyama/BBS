@@ -44,9 +44,8 @@ public class CommentsDao {
 	public List<UserComments> getComments(Connection connection) {
 		PreparedStatement ps = null;
 		try {
-			StringBuilder sql = new StringBuilder();
 			//投稿を表示
-			sql.append("SELECT * FROM UserComments ;");
+			String sql = "SELECT * FROM UserComments ;";
 			
 			ps = connection.prepareStatement(sql.toString());
 

@@ -16,9 +16,8 @@ public class ManagementDao {
 	public  List<ManagementUsers> select(Connection connection) {
 		PreparedStatement ps = null;
 		try {
-			StringBuilder sql = new StringBuilder();
 			//投稿を表示
-			sql.append("SELECT * FROM management ;");
+			String sql = "SELECT * FROM management ;";
 			
 			ps = connection.prepareStatement(sql.toString());
 			ResultSet rs = ps.executeQuery();
