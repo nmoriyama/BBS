@@ -19,9 +19,6 @@ public class CommentService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
-			rollback(connection);
-			throw e;
 		} finally {
 			close(connection);
 		}

@@ -9,13 +9,16 @@ body {
     width: 100%;
 	border-collapse: collapse;
 }
-
+/*入力画面*/
 .input-text {
 	text-align: center;
 }
+
+/*出力画面上部*/
 .head-text{
 	text-align: left;
 }
+
 .botton{
 	text-align: left;
 	left: 50px;
@@ -23,7 +26,6 @@ body {
 	font-size: 1.4em;
 	
 }
-/*login */
 
 /*ホーム画面(投稿、コメント)*/
 .comment-text {

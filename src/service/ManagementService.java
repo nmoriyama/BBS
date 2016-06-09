@@ -23,9 +23,6 @@ public class ManagementService {
 		} catch (RuntimeException e) {
 			rollback(connection);
 			throw e;
-		} catch (Error e) {
-			rollback(connection);
-			throw e;
 		} finally {
 			close(connection);
 		}
@@ -40,9 +37,6 @@ public class ManagementService {
 			commit(connection);
 			return ret;
 		} catch (RuntimeException e) {
-			rollback(connection);
-			throw e;
-		} catch (Error e) {
 			rollback(connection);
 			throw e;
 		} finally {

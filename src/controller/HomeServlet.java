@@ -37,7 +37,7 @@ public class HomeServlet extends HttpServlet {
 			request.setAttribute("firstMonth", request.getParameter("fromMonth"));
 			request.setAttribute("firstDay", request.getParameter("fromDay"));
 			request.setAttribute("lastYear", request.getParameter("toYear"));
-			request.setAttribute("lastMonth", request.getParameter("toYear"));
+			request.setAttribute("lastMonth", request.getParameter("toMonth"));
 			request.setAttribute("lastDay", request.getParameter("toDay"));
 
 		} else {
