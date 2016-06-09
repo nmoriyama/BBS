@@ -16,7 +16,7 @@ import beans.UserPostings;
 import exception.SQLRuntimeException;
 
 public class PostingsDao {
-	public void insert (Connection connection, Postings posting) {
+	public void insert(Connection connection, Postings posting) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
@@ -148,7 +148,7 @@ public class PostingsDao {
 		}
 	}
 	
-	public List<UserPostings> getPostingSearch(Connection connection,Postings posting) {
+	public List<UserPostings> getPostingSearch(Connection connection, Postings posting, List<String> search) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
@@ -157,17 +157,17 @@ public class PostingsDao {
 			sql.append(" AND ? <= record_date "); 
 			sql.append(" AND ? >= record_date ");  //
 			
-			if (!posting.getSurchCategory().isEmpty()) {
+			if (!search.get(2).isEmpty()) {
 				sql.append(" AND ? = category ");          //カテゴリーに
 			}
 			
 			sql.append(" ORDER BY record_date DESC ;");
 			ps = connection.prepareStatement(sql.toString());
 		
-			ps.setString(1, posting.getFromDate());
-			ps.setString(2, posting.getToDate());
-			if (!posting.getSurchCategory().isEmpty()) {
-				ps.setString(3, posting.getSurchCategory());
+			ps.setString(1, search.get(0));
+			ps.setString(2, search.get(1));
+			if (!search.get(2).isEmpty()) {
+				ps.setString(3, search.get(2));
 			}
 			ResultSet rs = ps.executeQuery();
 			List<UserPostings> ret = toUserPostingList(rs);
@@ -211,7 +211,7 @@ public class PostingsDao {
  		}
 	}
 	
-	public static void delete (Connection connection, String postingId) {
+	public static void delete(Connection connection, String postingId) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();

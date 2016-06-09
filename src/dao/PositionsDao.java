@@ -13,7 +13,7 @@ import beans.Positions;
 import exception.SQLRuntimeException;
 
 public class PositionsDao {
-	public List<Positions> getPosition (Connection connection) {
+	public List<Positions> getPosition(Connection connection) {
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT * FROM positions ;";

@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -30,8 +31,8 @@ public class HomeServlet extends HttpServlet {
 		String toDate = new String();
 		Postings posting = new Postings();
 		if (request.getParameter("fromYear") != null) {
-			fromDate = request.getParameter("fromYear")+"-"+request.getParameter("fromMonth")+"-"+request.getParameter("fromDay")+" 23:59:59";
-			toDate = request.getParameter("toYear")+"-"+request.getParameter("toMonth")+"-"+request.getParameter("toDay")+" 00:00:00";
+			fromDate = request.getParameter("fromYear")+"-"+request.getParameter("fromMonth")+"-"+request.getParameter("fromDay")+" 00:00:00";
+			toDate = request.getParameter("toYear")+"-"+request.getParameter("toMonth")+"-"+request.getParameter("toDay")+" 23:59:59";
 			
 			request.setAttribute("firstYear", request.getParameter("fromYear"));
 			request.setAttribute("firstMonth", request.getParameter("fromMonth"));
@@ -39,7 +40,6 @@ public class HomeServlet extends HttpServlet {
 			request.setAttribute("lastYear", request.getParameter("toYear"));
 			request.setAttribute("lastMonth", request.getParameter("toMonth"));
 			request.setAttribute("lastDay", request.getParameter("toDay"));
-
 		} else {
 			fromDate = date.get(0)+"-"+date.get(1)+"-"+date.get(2)+" 00:00:00";
 			toDate = date.get(3)+"-"+date.get(4)+"-"+date.get(5)+" 23:59:59";
@@ -55,11 +55,11 @@ public class HomeServlet extends HttpServlet {
 			SearchCategory = "";
 		}
 		List<String> category = new HomeService().getCategory();
-		
-		posting.setFromDate(fromDate);
-		posting.setToDate(toDate);
-		posting.setSurchCategory(SearchCategory);
-		List<UserPostings> postings = new HomeService().getPostingSurch(posting);
+		List<String> search = new ArrayList<String>();
+		search.add(fromDate);
+		search.add(toDate);
+		search.add(SearchCategory);
+		List<UserPostings> postings = new HomeService().getPostingSurch(posting, search);
 		request.setAttribute("SearchCategory", SearchCategory);
 		request.setAttribute("users", user);
 		request.setAttribute("postings", postings);

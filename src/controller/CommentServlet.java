@@ -49,7 +49,7 @@ public class CommentServlet extends HttpServlet{
 		//入力の確認
 		String comment = request.getParameter("comment");
 		if (comment.length() == 0) {
-			postings.add("メッセージを入力してください");
+			postings.add("コメントを入力してください");
 		}
 		if (500 < comment.length()) {
 			postings.add("コメントは500文字以下で入力してください");

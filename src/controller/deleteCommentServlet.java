@@ -22,7 +22,7 @@ public class DeleteCommentServlet  extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost (HttpServletRequest request,
+	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Connection connection = null;

@@ -10,7 +10,7 @@ import dao.UsersDao;
 import utils.CipherUtil;
 
 public class LoginService {
-	public Users login (String loginId, String password) {
+	public Users login(String loginId, String password) {
 		Connection connection = null;
 		try {
 			connection = getConnection();

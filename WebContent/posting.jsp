@@ -41,10 +41,7 @@
 			<p>
 				<label for = "body">本文(1000文字以下)</label>
 			</p>
-			<textarea name = "body" class = "input-box" id = "body">
-			<c:out value = "${ body }" /></textarea>
-			<br>
-
+			<textarea name = "body" class = "input-box" ><c:out value = "${ body }" /></textarea>
 			<p>
 				<input type = "submit" value = "投稿">
 			</p>

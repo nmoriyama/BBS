@@ -15,7 +15,6 @@ import beans.Users;
 import service.ManagementService;
 import service.UserService;
 
-
 @WebServlet(urlPatterns = {"/management"})
 public class ManagementServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;

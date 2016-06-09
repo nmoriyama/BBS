@@ -58,8 +58,7 @@ public class UsersDao {
 	}	
 	
 	//ログイン
-	public Users getUser(Connection connection, String loginId,
-			String password) {
+	public Users getUser(Connection connection, String loginId, String password) {
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT * FROM users WHERE login_id = ? AND password = ? ;";
@@ -129,7 +128,7 @@ public class UsersDao {
 	}
 	
 	//ユーザー編集
-	public String update(Connection connection, Users user, int passwordCheck) {
+	public String updateUser(Connection connection, Users user, int passwordCheck) {
 		String message = new String();
 		PreparedStatement SurchPs = null;
 		PreparedStatement ps = null;
@@ -184,7 +183,7 @@ public class UsersDao {
 	}
 	
 	//利用可能か停止中か
-	public void status(Connection connection, Users user) {
+	public void updateStatus(Connection connection, Users user) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();

@@ -15,7 +15,7 @@ import exception.SQLRuntimeException;
 
 public class CommentsDao {
 	//コメントの投稿実行
-	public static void insert (Connection connection, Comments comment) {
+	public static void insert(Connection connection, Comments comment) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();
@@ -87,7 +87,7 @@ public class CommentsDao {
 	}
 	
 	//コメントの削除実行
-	public static void delete (Connection connection, String commentId) {
+	public static void delete(Connection connection, String commentId) {
 		PreparedStatement ps = null;
 		try {
 			StringBuilder sql = new StringBuilder();

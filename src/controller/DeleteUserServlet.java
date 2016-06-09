@@ -25,7 +25,6 @@ public class DeleteUserServlet extends HttpServlet{
 	
 		session.setAttribute("messages", messages);
 		response.sendRedirect("./management");
-
 	}
 		
 }

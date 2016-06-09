@@ -63,13 +63,13 @@ public class HomeService {
 		}
 	}
 	
-	public List<UserPostings> getPostingSurch(Postings posting) { //絞り込み機能
+	public List<UserPostings> getPostingSurch(Postings posting, List<String> search) { //絞り込み機能
 		Connection connection = null;
 		try {
 			connection = getConnection();
 			PostingsDao PostingsDao = new PostingsDao();
 
-			List<UserPostings> ret = PostingsDao.getPostingSearch(connection, posting);
+			List<UserPostings> ret = PostingsDao.getPostingSearch(connection, posting, search);
 			commit(connection);
 			return ret;
 		} catch (RuntimeException e) {

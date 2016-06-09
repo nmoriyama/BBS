@@ -13,7 +13,7 @@ import beans.Branches;
 import exception.SQLRuntimeException;
 
 public class BranchesDao {
-	public List<Branches> getBranch (Connection connection) {
+	public List<Branches> getBranch(Connection connection) {
 		PreparedStatement ps = null;
 		try {
 			String sql = "SELECT * FROM branches ;";

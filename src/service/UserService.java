@@ -16,7 +16,7 @@ import utils.CipherUtil;
 
 public class UserService {
 
-	public String register (Users insertUser) {
+	public String register(Users insertUser) {
 		String message = new String();
 		Connection connection = null;
 		try {
@@ -36,7 +36,7 @@ public class UserService {
 		return message;
 	}
 
-	public String update (Users user, int passwordCheck) {
+	public String update(Users user, int passwordCheck) {
 		String message = new String();
 		Connection connection = null;
 		try {
@@ -46,7 +46,7 @@ public class UserService {
 			user.setPassword(encPassword);
 
 			UsersDao userDao = new UsersDao();
-			message = userDao.update(connection, user, passwordCheck);
+			message = userDao.updateUser(connection, user, passwordCheck);
 
 			commit(connection);
 		} catch (RuntimeException e) {
@@ -84,7 +84,7 @@ public class UserService {
 			connection = getConnection();
 
 			UsersDao userDao = new UsersDao();
-			userDao.status(connection, user);
+			userDao.updateStatus(connection, user);
 			commit(connection);
 		} catch (RuntimeException e) {
 			rollback(connection);
